@@ -1,0 +1,87 @@
+<div class="d-flex justify-content-between border-bottom pb-2">
+  <div>
+    <form [formGroup]="exform" (ngSubmit)="onSubmit()" *ngIf="showForm">
+      <div class="form-row">
+        <div class="form-group col-md-12">
+          <label for="Type">Type</label>
+          <input
+            type="text"
+            class="form-control"
+            id="CategoryType"
+            name="CategoryType"
+            formControlName="CategoryType"
+            placeholder="Please Add type"
+          />
+          <small
+            *ngIf="CategoryType.invalid && CategoryType.touched"
+            class="text-danger"
+            >Category type is required</small
+          >
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <div
+          class="col-md-12 pr-1 d-flex justify-content-end align-items-center"
+        >
+          <button
+            type="button"
+            class="btn mr-3 btn-danger"
+            (click)="closeForm()"
+          >
+            Close
+          </button>
+          <button
+            [disabled]="exform.invalid"
+            type="submit"
+            class="btn btn-primary"
+          >
+            Add
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="AddOptions">
+    <button
+      class="actionBtns ion ion-plus"
+      (click)="showFormFunction()"
+    ></button>
+  </div>
+</div>
+
+<div class="listView pt-3">
+  <h4 class="pb-3 m-0">All Category types</h4>
+  <!-- <ul class="CategoryTypesList">
+    <li class="CategoryTypes" *ngFor="let category of allCategoryTypes">
+      <p class="Category">{{ category.name }}</p>
+      <button
+        [disabled]="disableDelete"
+        class="actionBtns ion ion-ios-trash-outline"
+        (click)="deleteCategoryType(category._id)"
+      ></button>
+    </li>
+  </ul> -->
+  <table class="table table-dark">
+    <thead>
+      <tr>
+        <th scope="col-3">Id</th>
+        <th scope="col-3">Name</th>
+        <th scope="col-3">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let category of allCategoryTypes">
+        <th scope="row">{{ category._id }}</th>
+        <td>{{ category.name }}</td>
+        <td>
+          <button
+            [disabled]="disableDelete"
+            class="actionBtns ion ion-ios-trash-outline"
+            (click)="deleteCategoryType(category._id)"
+          ></button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

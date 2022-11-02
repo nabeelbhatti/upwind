@@ -1,0 +1,60 @@
+<div class="grid-header d-flex mb-1">
+    <div class="external-filters">
+        <span>
+            <label class="form-control-label ">Client</label>
+            <ejs-dropdownlist [dataSource]="allCategories?.Client" [fields]="{text: 'name',value: '_id'}"
+                [popupHeight]="'200px'" (change)="GetValues($event)">
+            </ejs-dropdownlist>
+        </span>
+        <span>
+            <label class="form-control-label ">Vessel</label>
+            <ejs-dropdownlist [dataSource]="allCategories?.Vessel" [fields]="{text: 'name',value: '_id'}"
+                [popupHeight]="'200px'" (change)="GetValues($event)">
+            </ejs-dropdownlist>
+        </span>
+    </div>
+</div>
+
+<div class="my-1">
+    <p class="h5">Particulars</p>
+    <ejs-grid #particularGrid id="particularGrid" height=130 [dataSource]='SourceData' 
+        [allowSelection]='true' [enableHover]='true' [enableHeaderFocus]='true' [allowSorting]='true'
+        allowResizing='true' allowReordering='true' showColumnChooser='true' [editSettings]="editSettings"
+        [toolbar]="toolbarChild" [pageSettings]="pageSettings1" (actionBegin)="onActionCompleteManualIndexFile($event)">
+        <e-columns>
+            <e-column *ngFor="let column of columns" [field]="column.fieldName" [headerText]="column.displayName"
+                [width]="column.width" clipMode='EllipsisWithTooltip' [visible]="column.visible" 
+                [isPrimaryKey]='column.isPrimaryKey' [validationRules]="column.validationRules"
+                [editType]="column.editType" [edit]="column.editParam">
+            </e-column>
+            <e-column headerText="Action" freeze='Right' width="120" [allowEditing]=false>
+                <ng-template #template let-data>
+                    <i class="actionBtns fa-solid fa-eye" (click)="getDataOfRow(data)"></i>
+                </ng-template>
+            </e-column>
+        </e-columns>
+    </ejs-grid>
+</div>
+
+
+<div class="my-1">
+    <p class="h5">Components Details</p>
+    <ejs-grid #ComponentsGrid id="ComponentsGrid" [dataSource]='SourceData2' [allowPaging]="true"
+        [filterSettings]='{ type:"CheckBox"}' [allowFiltering]='true' [allowSelection]='true' [enableHover]='true'
+        [enableHeaderFocus]='true' [allowSorting]='true' allowResizing='true' showColumnChooser='true'
+        allowReordering='true' allowPaging='true' [pageSettings]='pageSettings2' locale='en-US'
+        [editSettings]="editSettings" [toolbar]="CustomtoolbarChild" (actionBegin)="childAction($event)" height="380px">
+        <e-columns>
+            <e-column *ngFor="let column of columns2" [field]="column.fieldName" [headerText]="column.displayName"
+                [width]="column.width" clipMode='EllipsisWithTooltip' [visible]="column.visible"
+                [isPrimaryKey]='column.isPrimaryKey === true'>
+            </e-column>
+            <div>
+                <ejs-dialog id='dialog' #ejDialog [isModal]="true" [animationSettings]="{effect: 'true'}"
+                    content='No records selected for view operation' [visible]="false" width='300px' [buttons]='buttons'
+                    [position]='position'>
+                </ejs-dialog>
+            </div>
+        </e-columns>
+    </ejs-grid>
+</div>

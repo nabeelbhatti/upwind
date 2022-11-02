@@ -1,0 +1,102 @@
+<div class="control-section">
+  <div class="grid-header flex">
+    <div class="external-filters">
+      <span>
+        <label class="form-control-label">Client</label>
+        <ejs-dropdownlist
+          [dataSource]="clients"
+          [fields]="{ text: 'name', value: '_id' }"
+          [placeholder]="'Select client'"
+          [popupHeight]="'200px'"
+          (change)="onChangeClient($event)"
+        ></ejs-dropdownlist>
+      </span>
+      <span>
+        <label class="form-control-label">Vessel</label>
+        <ejs-dropdownlist
+          [dataSource]="vessels"
+          [fields]="{ text: 'name', value: '_id' }"
+          [placeholder]="'Select vessel'"
+          [popupHeight]="'200px'"
+          (change)="onChangeVessel($event)"
+        ></ejs-dropdownlist>
+      </span>
+    </div>
+  </div>
+  <div class="grid-section mt-3">
+    <div>
+      <p class="h5">Manual Index Files</p>
+      <ejs-grid
+        #mastergrid
+        id="mastergrid"
+        allowSorting="true"
+        allowResizing="true"
+        [dataSource]="parentData"
+        [editSettings]="editSettings"
+        [pageSettings]="pageSettings"
+        [toolbar]="toolbarParent"
+        [height]="120"
+        (actionBegin)="onActionBeginManualIndexFile($event)"
+      >
+        <e-columns>
+          <e-column
+            *ngFor="let column of manualIndexFileColumns"
+            clipMode="EllipsisWithTooltip"
+            [field]="column.fieldName"
+            [headerText]="column.displayName"
+            [width]="column.width"
+            [visible]="column.visible"
+            [validationRules]="column.validationRules"
+            [allowEditing]="column.allowEditing"
+            [isPrimaryKey]="column.isPrimaryKey"
+            [editType]="column.editType"
+            [edit]="column.editParam"
+          >
+          </e-column>
+          <e-column headerText="Action" width="100"
+            ><ng-template #template let-data>
+              <a
+                href="javascript:void(0);"
+                target="_blank"
+                [routerLink]="['/pages/manual-index-pdf/', data._id]"
+                ><span class="e-icons e-eye"></span
+              ></a>
+            </ng-template>
+          </e-column>
+        </e-columns>
+      </ejs-grid>
+    </div>
+
+    <div class="mt-3">
+      <p class="h5">Manual List</p>
+      <ejs-grid
+        #detailgrid
+        id="detailgrid"
+        allowPaging="true"
+        allowSorting="true"
+        [dataSource]="manualListData"
+        [allowSelection]="false"
+        [editSettings]="editSettings"
+        [pageSettings]="pageSettings"
+        [toolbar]="toolbarChild"
+        (toolbarClick)="toolbarClickManualList($event)"
+        (actionBegin)="onActionCompleteManualListFile($event)"
+      >
+        <e-columns>
+          <e-column
+            *ngFor="let column of manualListColumns"
+            [field]="column.fieldName"
+            [headerText]="column.displayName"
+            [width]="column.width"
+            clipMode="EllipsisWithTooltip"
+            [visible]="column.visible"
+            [validationRules]="column.validationRules"
+            [allowEditing]="column.allowEditing"
+            [isPrimaryKey]="column.isPrimaryKey"
+          >
+          </e-column>
+        </e-columns>
+      </ejs-grid>
+    </div>
+  </div>
+</div>

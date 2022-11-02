@@ -1,0 +1,171 @@
+<div class="container p-2">
+  <form (ngsubmit)="SaveVesselInformation()" [formGroup]="VesselInformatonForm">
+    <div class="row mb-5">
+      <div class="col-lg-5 col-md-5 col-sm-12">
+        <label class="form-control-label ">Client<span class="text-danger"> *</span></label>
+        <ejs-dropdownlist id="ClientName" formControlName="clientName" class="inputFeilds px-1 mt-1" #sample2
+          [dataSource]="allCategories?.Client" [fields]="{text: 'name',value: '_id'}" [popupHeight]="'200px'"
+          sortOrder="Ascending" (change)="GetValues($event) ; getClientObject($event)"></ejs-dropdownlist>
+        <small
+          *ngIf="VesselInformatonForm.controls['ClientName']?.invalid && VesselInformatonForm.controls['ClientName']?.touched"
+          class="text-danger">Client is
+          required</small>
+      </div>
+      <div class="col-lg-5 col-md-5 col-sm-12">
+        <label class="form-control-label ">Vessel Name<span class="text-danger"> *</span></label>
+        <ejs-dropdownlist id="VesselName" formControlName="vesselName" class="inputFeilds px-1 mt-1" #sample2
+          [dataSource]="allCategories?.Vessel" [fields]="{text: 'name',value: '_id'}" [popupHeight]="'200px'"
+          sortOrder="Ascending" (change)="GetValues($event); getVesselNameObject($event)"></ejs-dropdownlist>
+        <small
+          *ngIf="VesselInformatonForm.controls['VesselName']?.invalid && VesselInformatonForm.controls['VesselName']?.touched"
+          class="text-danger">Vessel Name is
+          required</small>
+      </div>
+      <div class="col-lg-2 col-md-2 col-sm-12 d-flex justify-content-center align-items-end" [ngClass]="{'align-items-center': 
+    (VesselInformatonForm.controls['ClientName']?.invalid && VesselInformatonForm.controls['ClientName']?.touched) || 
+    (VesselInformatonForm.controls['VesselName']?.invalid && VesselInformatonForm.controls['VesselName']?.touched)}">
+        <button type="button" class="btn btn-outline-light SubmitButton w-75" (click)="SaveVesselInformation()"
+          [disabled]="DisableButton === true || VesselInformatonForm.pristine || VesselInformatonForm.invalid"
+          [style.background-color]="DisableButton === true || VesselInformatonForm.pristine || VesselInformatonForm.invalid ? 'grey': ''">Save</button>
+      </div>
+    </div>
+    <div class="v-space">
+      <div class="row mb-2">
+        <div class="col-lg-4 col-md-4 col-sm-12">
+          <label>IMO NO<span class="text-danger">*</span></label> <br>
+          <input type="number" class="inputFeilds w-100" id="imoNo" name="imoNo" formControlName="imoNo"
+            [placeholder]="IMO_PH" [readonly]="DisableButton === true"
+            [style.border-color]="DisableButton === true ? 'grey': 'white'" />
+          <ng-container *ngIf="DisableButton !== true">
+            <small
+              *ngIf="VesselInformatonForm.controls['imoNo']?.invalid && VesselInformatonForm.controls['imoNo']?.touched"
+              class="text-danger">IMO field is
+              required</small>
+          </ng-container>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-12">
+          <label>Hull Number<span class="text-danger">*</span></label> <br>
+          <input type="text" class="inputFeilds w-100" id="hull_number" name="hull_number" formControlName="hull_number"
+            [value]="Hull_Number_PH" [readonly]="DisableButton === true"
+            [style.border-color]="DisableButton === true ? 'grey': 'white'" />
+          <ng-container *ngIf="DisableButton !== true">
+            <small
+              *ngIf="VesselInformatonForm.controls['hull_number']?.invalid && VesselInformatonForm.controls['hull_number']?.touched"
+              class="text-danger">Hull number is
+              required</small>
+          </ng-container>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-12">
+          <label class="form-control-label ">Yard Name<span class="text-danger"> *</span></label>
+          <ejs-dropdownlist id="yard_name" formControlName="yard_name" class="inputFeilds px-1 mt-1" #sample2
+            [dataSource]="allCategories?.Yard" [fields]="{text: 'name',value: '_id'}" [popupHeight]="'200px'"
+            sortOrder="Ascending" [readonly]="DisableButton === true" [readonly]="DisableButton === true"
+            [style.border-color]="DisableButton === true ? 'grey': 'white'" (change)="getYardNameObject($event)"></ejs-dropdownlist>
+          <ng-container *ngIf="DisableButton !== true">
+            <small
+              *ngIf="VesselInformatonForm.controls['yard_name']?.invalid && VesselInformatonForm.controls['yard_name']?.touched"
+              class="text-danger">Yard Name Name is
+              required</small>
+          </ng-container>
+        </div>
+      </div>
+
+      <div class="row mb-2">
+        <div class="col-lg-4 col-md-4 col-sm-12">
+          <label>Delivery Date</label> <br>
+          <input type="date" class="inputFeilds w-100" id="DeliveryDate" name="DeliveryDate"
+            formControlName="delivery_date"
+            [readonly]=" DisableButton === true || VesselInformatonForm.pristine || VesselInformatonForm.invalid"
+            [style.border-color]="DisableButton === true || VesselInformatonForm.pristine || VesselInformatonForm.invalid ? 'grey': 'white'" />
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-12">
+          <label>Gross Tonnage</label> <br>
+          <input type="number" class="inputFeilds w-100" id="GrossTonnage" name="GrossTonnage"
+            formControlName="gross_tonnage" [placeholder]="Gross_Tonnage_PH"
+            [readonly]=" DisableButton === true || VesselInformatonForm.pristine || VesselInformatonForm.invalid"
+            [style.border-color]="DisableButton === true || VesselInformatonForm.pristine || VesselInformatonForm.invalid ? 'grey': 'white'" />
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-12">
+          <label>Summer DWT</label> <br>
+          <input type="number" class="inputFeilds w-100" id="SummerDWT" name="SummerDWT" formControlName="summer_dwt"
+            [placeholder]="Summer_Dwt_PH"
+            [readonly]=" DisableButton === true || VesselInformatonForm.pristine || VesselInformatonForm.invalid"
+            [style.border-color]="DisableButton === true || VesselInformatonForm.pristine || VesselInformatonForm.invalid ? 'grey': 'white'" />
+        </div>
+      </div>
+
+      <div class="row mb-2">
+        <div class="col-lg-4 col-md-4 col-sm-12">
+          <label>Actual Start date</label> <br>
+          <input type="date" class="inputFeilds w-100" id="ActualStart" name="ActualStart" formControlName="startDate"
+            [readonly]=" DisableButton === true || VesselInformatonForm.pristine || VesselInformatonForm.invalid"
+            [style.border-color]="DisableButton === true || VesselInformatonForm.pristine || VesselInformatonForm.invalid ? 'grey': 'white'" />
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-12">
+          <label>Target Date</label> <br>
+          <input type="date" class="inputFeilds w-100" id="TargetDate" name="TargetDate" formControlName="targetDate"
+            [readonly]=" DisableButton === true || VesselInformatonForm.pristine || VesselInformatonForm.invalid"
+            [style.border-color]="DisableButton === true || VesselInformatonForm.pristine || VesselInformatonForm.invalid ? 'grey': 'white'" />
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-12">
+          <label>Actual End Date</label> <br>
+          <input type="date" class="inputFeilds w-100" id="ActualEndDate" name="ActualEndDate"
+            formControlName="endDate"
+            [readonly]=" DisableButton === true || VesselInformatonForm.pristine || VesselInformatonForm.invalid"
+            [style.border-color]="DisableButton === true || VesselInformatonForm.pristine || VesselInformatonForm.invalid ? 'grey': 'white'" />
+        </div>
+      </div>
+
+      <div class="row mb-2">
+        <div class="col-lg-4 col-md-4 col-sm-12">
+          <label class="form-control-label ">Vessel Class</label>
+          <ejs-dropdownlist id="VesselClass" formControlName="vessel_class" class="inputFeilds px-1 mt-1" #sample2
+            [dataSource]="allCategories?.VesselClass" [fields]="{text: 'name',value: '_id'}" [popupHeight]="'200px'"
+            sortOrder="Ascending"
+            [readonly]=" DisableButton === true || VesselInformatonForm.pristine || VesselInformatonForm.invalid"
+            [style.border-color]="DisableButton === true || VesselInformatonForm.pristine || VesselInformatonForm.invalid ? 'grey': 'white'" (change)="getVesselClassObject($event)">
+          </ejs-dropdownlist>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-12">
+          <label class="form-control-label ">Stage</label>
+          <ejs-dropdownlist id="Stage" formControlName="stage" class="inputFeilds px-1 mt-1" #sample2
+            [dataSource]="allCategories?.Stage" [fields]="{text: 'name',value: '_id'}" [popupHeight]="'200px'"
+            sortOrder="Ascending"
+            [readonly]=" DisableButton === true || VesselInformatonForm.pristine || VesselInformatonForm.invalid"
+            [style.border-color]="DisableButton === true || VesselInformatonForm.pristine || VesselInformatonForm.invalid ? 'grey': 'white'" (change)="getStageObject($event)">
+          </ejs-dropdownlist>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-12">
+          <label class="form-control-label ">Select Status</label>
+          <ejs-dropdownlist id="Status" formControlName="status" class="inputFeilds px-1 mt-1" #sample2
+            [dataSource]="allCategories?.Status" [fields]="{text: 'name',value: '_id'}" [popupHeight]="'200px'"
+            sortOrder="Ascending"
+            [readonly]=" DisableButton === true || VesselInformatonForm.pristine || VesselInformatonForm.invalid"
+            [style.border-color]="DisableButton === true || VesselInformatonForm.pristine || VesselInformatonForm.invalid ? 'grey': 'white'" (change)="getSelectStatus($event)">
+          </ejs-dropdownlist>
+        </div>
+      </div>
+
+      <div class="row mb-2">
+        <div class="col-lg-6 col-md-6 col-sm-12">
+          <label class="form-control-label ">PMS Analysis</label>
+          <ejs-multiselect id="PMSAnalysis" formControlName="pmsAnalyst" class="inputFeilds px-1 mt-1"
+            [dataSource]="allCategories?.pmsanalyst" [fields]="{text: 'name',value: '_id'}" [popupHeight]="'200px'"
+            [placeholder]="'Select Assignee'" sortOrder="Ascending" [mode]="'CheckBox'" showSelectAll='true'
+            [readonly]="DisableButton === true || VesselInformatonForm.pristine || VesselInformatonForm.invalid"
+            [style.border-color]="DisableButton === true || VesselInformatonForm.pristine || VesselInformatonForm.invalid ? 'grey': 'white'" (change)="getPMSAnalysis($event)">
+          </ejs-multiselect>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-12">
+          <label class="form-control-label ">Team Members</label>
+          <ejs-dropdownlist id="" formControlName="team_members" class="inputFeilds px-1 mt-1" #sample2
+            [dataSource]="allCategories?.TeamMember" [fields]="{text: 'name',value: '_id'}" [popupHeight]="'200px'"
+            sortOrder="Ascending"
+            [readonly]=" DisableButton === true || VesselInformatonForm.pristine || VesselInformatonForm.invalid"
+            [style.border-color]="DisableButton === true || VesselInformatonForm.pristine || VesselInformatonForm.invalid ? 'grey': 'white'" (change)="getTeamMembers($event)">
+          </ejs-dropdownlist>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

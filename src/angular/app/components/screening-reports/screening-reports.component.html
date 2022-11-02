@@ -1,0 +1,262 @@
+<div class="control-section">
+  <div class="grid-header flex">
+    <div class="external-filters">
+      <span>
+        <label class="form-control-label">Client</label>
+
+        <ejs-dropdownlist
+          #filterDropDown
+          id="allclients"
+          [dataSource]="allClients"
+          (change)="getProjectsByClientid($event)"
+          [fields]="fieldss"
+          placeholder="Select Client"
+          [popupHeight]="filterPopupHeight"
+        ></ejs-dropdownlist>
+      </span>
+
+      <span>
+        <label style="margin: 16px 15px 0px 15px;" class="form-control-label"
+          >Vessel</label
+        >
+
+        <ejs-dropdownlist
+          #filterDropDown
+          id="allcategoriess"
+          class="mx-3"
+          [dataSource]="allCategories"
+          (change)="getProjectsByid($event)"
+          [fields]="fieldss"
+          placeholder="Select Vessel"
+          [popupHeight]="filterPopupHeight"
+          [readonly]="allCategories === undefined"
+        >
+        </ejs-dropdownlist>
+      </span>
+    </div>
+  </div>
+
+  <div class="pane2 my-3">
+    <ejs-splitter
+      #vertical
+      height="100%"
+      separatorSize="4"
+      width="100%"
+      class="border-none"
+      orientation="Vertical"
+      style="border: none;"
+    >
+      <e-panes>
+        <e-pane size="30%" min="60px">
+          <ng-template #content>
+            <p class="heading">Report Creation</p>
+
+            <ejs-grid
+               #normalgrid
+              id="Normalgrid"
+              [dataSource]="data"
+              [pageSettings]="pageSettings"
+              [editSettings]="editSettings"
+              rowHeight="30"
+              [toolbar]="toolbar"
+              [allowResizing]="true"
+              (toolbarClick)="rootFoldersToolBar($event)"
+              (actionBegin)="actionBegin($event)"
+            >
+              <e-columns>
+                <e-column
+                  field="report_Date"
+                  headerText="Report Date"
+                  width="20"
+                ></e-column>
+                <e-column
+                  field="batch_no"
+                  headerText="Batch No."
+                  width="30"
+                  [edit]="dpParams"
+                  editType="dropdownedit"
+                >
+                </e-column>
+
+                <e-column
+                  field="latest_Date_of_Data_Received"
+                  headerText="Latest Date of Data Received"
+                  width="20"
+                  [validationRules]="{ required: true }"
+                
+                ></e-column>
+
+                <e-column
+                  field="Status"
+                  headerText="Status"
+                  width="20"
+                  editType="dropdownedit"
+                  [edit]="statusParams"
+                  [allowEditing]="true"
+                ></e-column>
+                <e-column
+                  [allowEditing]="false"
+                  headerText="Actions"
+                  width="30"
+                >
+                  <ng-template #template let-data>
+                    <button type="button" class="actionbtns  btn btn-link">
+                      Start
+                    </button>
+                  </ng-template>
+                </e-column>
+              </e-columns>
+            </ejs-grid>
+          </ng-template>
+        </e-pane>
+        <e-pane size="80%" min="60px">
+          <ng-template #content>
+            <p class="heading my-3">Source Files</p>
+
+            <ejs-grid
+              #SourceFilesGrid
+              id="SourceFilesGrid"
+              [dataSource]="data2"
+              rowHeight="30"
+              [allowSelection]="true"
+              [enableHover]="false"
+              [enableHeaderFocus]="true"
+              [filterSettings]="{ type: 'CheckBox' }"
+              [allowFiltering]="true"
+              [allowSorting]="true"
+              [allowResizing]="true"
+              [editSettings]="editSettingsSf"
+              [toolbar]="toolbar2"
+              (toolbarClick)="toolbarClick($event)"
+              allowReordering="true"
+              allowPaging="true"
+              [pageSettings]="initialPage"
+              locale="en-US"
+              (actionBegin)="actionBegin($event)"
+            >
+              <e-columns>
+                <e-column
+                  field="Vessel_Type"
+                  headerText="Vessel Type"
+                  filter="{ type: 'Checkbox' }"
+                  width="160px"
+                  [visible]="true"
+                  [validationRules]="{ required: true }"
+                  [allowEditing]="true"
+                ></e-column>
+                <e-column
+                  field="Type_of_Update"
+                  headerText="Typeo of Update"
+                  filter="{ type: 'Checkbox' }"
+                  width="130px"
+                  [visible]="true"
+                  [validationRules]="{ required: true }"
+                  [allowEditing]="true"
+                >
+                </e-column>
+
+                <e-column
+                  field="Plant"
+                  headerText="Plant"
+                  filter="{ type: 'Checkbox' }"
+                  width="130px"
+                  [visible]="true"
+                  [allowEditing]="true"
+                >
+                </e-column>
+                <e-column
+                  field="Main_Machinery"
+                  headerText="Main Machinery"
+                  filter="{ type: 'Checkbox' }"
+                  width="130px"
+                  [visible]="true"
+                  [allowEditing]="true"
+                >
+                </e-column>
+                <e-column
+                  field="Manual_Received"
+                  headerText="Manual Received"
+                  filter="{ type: 'Checkbox' }"
+                  width="130px"
+                  [edit]="ManualReceivedParams"
+                  [visible]="true"
+                  [allowEditing]="true"
+                >
+                </e-column>
+                <e-column
+                  field="Jobs_Status"
+                  headerText="Jobs_Status"
+                  filter="{ type: 'Checkbox' }"
+                  width="130px"
+                  [edit]="JobStatusParams"
+                  [visible]="true"
+                  [allowEditing]="true"
+                >
+                </e-column>
+                <e-column
+                  field="Spares_Status"
+                  headerText="Spares Status"
+                  filter="{ type: 'Checkbox' }"
+                  width="130px"
+                  [edit]="SparesStatusParams"
+                  [visible]="true"
+                  [validationRules]="{ required: true }"
+                  [allowEditing]="true"
+                >
+                </e-column>
+
+                <e-column
+                  field="Screening_Remarks"
+                  headerText="Screening Remarks"
+                  filter="{ type: 'Checkbox' }"
+                  width="200px"
+                  [visible]="true"
+                  [validationRules]="{ required: true }"
+                  [allowEditing]="true"
+                >
+                </e-column>
+                <e-column
+                  field="Client_Remarks"
+                  headerText="Client Remarks"
+                  filter="{ type: 'Checkbox' }"
+                  width="200px"
+                  [visible]="true"
+                  [validationRules]="{ required: true }"
+                  [allowEditing]="true"
+                >
+                </e-column>
+                <e-column
+                  field="Updated_Date"
+                  headerText="Updated Date"
+                  filter="{ type: 'Checkbox' }"
+                  width="130px"
+                  [visible]="true"
+                  editType="date"
+                  [validationRules]="{ required: true }"
+                  [allowEditing]="true"
+                >
+                </e-column>
+                <e-column
+                  field="Updated_By"
+                  headerText="Updated By"
+                  filter="{ type: 'Checkbox' }"
+                  width="200px"
+                  [visible]="true"
+                  [validationRules]="{ required: true }"
+                  [allowEditing]="true"
+                >
+                </e-column>
+
+                <e-column headerText="Action" width="100">
+                  <ng-template #template let-data>
+                    <button class="actionBtns ion ion-trash-a"></button>
+                  </ng-template>
+                </e-column>
+              </e-columns>
+            </ejs-grid>
+          </ng-template>
+        </e-pane>
+      </e-panes>
+    </ejs-splitter>
+  </div>
+</div>

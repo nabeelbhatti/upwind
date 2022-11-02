@@ -1,0 +1,523 @@
+<div class="pmsProjectDetail">
+  <ejs-dialog
+    id="component-dialog"
+    #DialogPop
+    header="Source File"
+    [isModal]="true"
+    [animationSettings]="animationSettings"
+    [showCloseIcon]="showCloseIcon"
+    [width]="dialogwidth"
+    (close)="onClose()"
+    [visible]="hidden"
+    (overlayClick)="onOverlayClick()"
+  >
+    <ng-template #content>
+      <div class="row pb-2">
+        <div class="col-md-8">
+          <table class="size py-2 d-flex justify-content-center">
+            <tr class="d-flex align-items-center">
+              <td class="lSize px-2">Search:</td>
+              <td>
+                <input
+                  #queryInp
+                  id="pdfQueryInput"
+                  type="text"
+                  placeholder="Search in pdf"
+                  [value]="pdfQuery"
+                  (input)="searchQueryChanged($event.target.value)"
+                  (keyup.enter)="searchQueryChanged(queryInp.value)"
+                />
+              </td>
+              <td class="mx-1">
+                <button
+                  (click)="prevPage()"
+                  [disabled]="page === 1"
+                  class="btn btn-sm btn-outline-light"
+                >
+                  Prev
+                </button>
+              </td>
+              <td class="mx-1">{{ page }}/{{ totalPages }}</td>
+
+              <td>
+                <button
+                  (click)="nextPage()"
+                  [disabled]="page === totalPages"
+                  class="btn btn-sm btn-outline-light"
+                >
+                  Next
+                </button>
+              </td>
+            </tr>
+          </table>
+
+          <pdf-viewer
+            *ngIf="pdfUrl !== ''"
+            [src]="pdfUrl"
+            [original-size]="true"
+            [show-all]="true"
+            [(page)]="page"
+            [stick-to-page]="true"
+            style="height:450px; width: 100%; "
+            (after-load-complete)="afterLoadComplete($event)"
+          ></pdf-viewer>
+        </div>
+
+        <div class="col-md-4">
+          <div class="FormCard">
+            <h5 class="text-center mb-1">
+              File Content
+            </h5>
+            <form
+              [formGroup]="fileContentForm"
+              (ngSubmit)="fileContentFormSubmit()"
+              class="form-card"
+            >
+              <div class="row justify-content-between text-left">
+                <div class="form-group mb-2 col-sm-12 flex-column d-flex">
+                  <label class="form-control-label "
+                    >File Name<span class="text-danger"> *</span></label
+                  >
+                  <input
+                    type="text"
+                    class="inputFeilds"
+                    id="fileName"
+                    name="fileName"
+                    formControlName="fileName"
+                  />
+                  <small
+                    *ngIf="fileName.invalid && fileName.touched"
+                    class="text-danger"
+                    >File Name is required</small
+                  >
+                </div>
+                <div class="form-group mb-2 col-sm-12 flex-column d-flex">
+                  <label class="form-control-label "
+                    >Manual Type<span class="text-danger"> *</span></label
+                  >
+                  <input
+                    type="text"
+                    class="inputFeilds"
+                    id="manualType"
+                    name="manualType"
+                    formControlName="manualType"
+                  />
+                  <small
+                    *ngIf="manualType.invalid && manualType.touched"
+                    class="text-danger"
+                    >Manual Type is required</small
+                  >
+                </div>
+              </div>
+              <div class="row justify-content-between text-left">
+                <div class="form-group mb-2 col-sm-12 flex-column d-flex">
+                  <label class="form-control-label "
+                    >Appendix Pages<span class="text-danger"> *</span></label
+                  >
+                  <input
+                    type="text"
+                    class="inputFeilds"
+                    id="appendixPages"
+                    name="appendixPages"
+                    formControlName="appendixPages"
+                    placeholder=""
+                  />
+                  <small
+                    *ngIf="appendixPages.invalid && appendixPages.touched"
+                    class="text-danger"
+                    >Appendix Pages is required</small
+                  >
+                </div>
+                <div class="form-group mb-2 col-sm-12 flex-column d-flex">
+                  <label class="form-control-label "
+                    >Notes<span class="text-danger"> *</span></label
+                  >
+                  <input
+                    type="text"
+                    class="inputFeilds"
+                    id="notes"
+                    name="notes"
+                    formControlName="notes"
+                    placeholder=""
+                  />
+                  <small
+                    *ngIf="notes.invalid && notes.touched"
+                    class="text-danger"
+                    >Notes is required</small
+                  >
+                </div>
+              </div>
+              <div class="row justify-content-end">
+                <div
+                  class="form-group mb-2 d-flex  align-items-center justify-content-between col-sm-12"
+                >
+                  <button
+                    [disabled]="fileContentForm.invalid"
+                    type="submit"
+                    [class]="
+                      fileContentForm.invalid
+                        ? 'SubmitButton btnDisable'
+                        : 'SubmitButton'
+                    "
+                  >
+                    Submit
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+  </ejs-dialog>
+</div>
+
+<div class="control-section">
+  <div class="grid-header flex">
+    <div class="external-filters">
+      <span>
+        <label class="form-control-label">Client</label>
+
+        <ejs-dropdownlist
+          #filterDropDown
+          id="allclients"
+          [dataSource]="allClients"
+          (change)="getProjectsByClientid($event)"
+          [fields]="fieldss"
+          placeholder="Select Client"
+          [popupHeight]="filterPopupHeight"
+        ></ejs-dropdownlist>
+      </span>
+
+      <span>
+        <label style="margin: 16px 15px 0px 15px;" class="form-control-label"
+          >Vessel</label
+        >
+
+        <ejs-dropdownlist
+          #filterDropDown
+          id="allcategoriess"
+          class="mx-3"
+          [dataSource]="allCategories"
+          (change)="getProjectsByid($event)"
+          [fields]="fieldss"
+          placeholder="Select Vessel"
+          [popupHeight]="filterPopupHeight"
+          [readonly]="allCategories === undefined"
+        >
+        </ejs-dropdownlist>
+      </span>
+    </div>
+  </div>
+
+  <div class="pane2 my-3">
+    <ejs-splitter
+      #vertical
+      height="100%"
+      separatorSize="4"
+      width="100%"
+      class="border-none"
+      orientation="Vertical"
+      style="border: none;"
+    >
+      <e-panes>
+        <e-pane size="30%" min="60px">
+          <ng-template #content>
+            <p class="heading">Root Folders</p>
+
+            <ejs-grid
+              #normalgrid
+              id="Normalgrid"
+              [dataSource]="data"
+              [pageSettings]="pageSettings"
+              [editSettings]="editSettings"
+              rowHeight="30"
+              [toolbar]="toolbar"
+              [allowResizing]="true"
+              (toolbarClick)="rootFoldersToolBar($event)"
+              (actionBegin)="actionBegin($event)"
+            >
+              <e-columns>
+                <e-column
+                  field="batch_no"
+                  headerText="Batch No."
+                  width="20"
+                  [validationRules]="customeridrules"
+                  [isPrimaryKey]="true"
+                >
+                </e-column>
+
+                <e-column
+                  field="date_revieved"
+                  headerText="Date Received"
+                  width="20"
+                  editType="datepickeredit"
+                ></e-column>
+
+                <e-column
+                  field="sharePoint_link"
+                  headerText="SharePoint Link"
+                  width="20"
+                  [validationRules]="{ required: true }"
+                  [isPrimaryKey]="true"
+                ></e-column>
+
+                <e-column
+                  field="screening_status"
+                  headerText="Screening Status"
+                  width="20"
+                  [allowEditing]="false"
+                ></e-column>
+
+                <e-column
+                  field="total_files"
+                  headerText="Total Files"
+                  width="20"
+                  [allowEditing]="false"
+                >
+                </e-column>
+
+                <e-column
+                  field="screening_date"
+                  headerText="Screening Date"
+                  width="20"
+                  editType="datepickeredit"
+                  [allowEditing]="false"
+                ></e-column>
+
+                <e-column
+                  field="progress"
+                  headerText="Progress"
+                  width="30"
+                  [allowEditing]="false"
+                >
+                  <ng-template #template let-data>
+                    <div class="progress">
+                      <div
+                        class="progress-bar progress-bar-success"
+                        role="progressbar"
+                        aria-valuenow="{{ data.progress }}"
+                        aria-valuemin="0"
+                        aria-valuemax="100"
+                        style="width:{{ data.progress }}%"
+                      >
+                        {{ data.progress | number: '1.0-0' }}%
+                      </div>
+                    </div>
+                  </ng-template>
+                </e-column>
+
+                <e-column
+                  [allowEditing]="false"
+                  headerText="Actions"
+                  width="30"
+                >
+                  <ng-template #template let-data>
+                    <button
+                      [disabled]="data.screening_status !== 'Open'"
+                      type="button"
+                      (click)="extractParentFileForProject(data)"
+                      [class]="
+                        data.screening_status !== 'Open'
+                          ? 'actionbtns btnDisable btn btn-link'
+                          : 'actionbtns  btn btn-link'
+                      "
+                    >
+                      Extract</button
+                    ><button
+                      type="button"
+                      [disabled]="data.screening_status !== 'Extracted'"
+                      (click)="startParentFileForProject(data)"
+                      [class]="
+                        data.screening_status !== 'Extracted'
+                          ? 'actionbtns btnDisable btn btn-link'
+                          : 'actionbtns  btn btn-link'
+                      "
+                    >
+                      Start
+                    </button>
+                  </ng-template>
+                </e-column>
+              </e-columns>
+            </ejs-grid>
+          </ng-template>
+        </e-pane>
+        <e-pane size="80%" min="60px">
+          <ng-template #content>
+            <p class="heading my-3">Source Files</p>
+
+            <ejs-grid
+              #SourceFilesGrid
+              id="SourceFilesGrid"
+              [dataSource]="childData"
+              rowHeight="30"
+              [allowSelection]="true"
+              [enableHover]="false"
+              [enableHeaderFocus]="true"
+              [filterSettings]="{ type: 'CheckBox' }"
+              [allowFiltering]="true"
+              [allowSorting]="true"
+              [allowResizing]="true"
+              [editSettings]="editSettingsSf"
+              [toolbar]="toolbar2"
+              (toolbarClick)="toolbarClick($event)"
+              allowReordering="true"
+              allowPaging="true"
+              [pageSettings]="initialPage"
+              locale="en-US"
+              (actionBegin)="actionBegin($event)"
+            >
+              <e-columns>
+                <e-column
+                  field="pdf_id"
+                  headerText="PDF_ID"
+                  filter="{ type: 'Checkbox' }"
+                  width="130px"
+                  [visible]="false"
+                  [validationRules]="{ required: true }"
+                  [allowEditing]="false"
+                ></e-column>
+                <e-column
+                  field="batch_no"
+                  headerText="Batch No."
+                  filter="{ type: 'Checkbox' }"
+                  width="130px"
+                  [visible]="true"
+                  [validationRules]="{ required: true }"
+                  [allowEditing]="false"
+                >
+                </e-column>
+
+                <e-column
+                  field="folder_name"
+                  headerText="Folder Name"
+                  filter="{ type: 'Checkbox' }"
+                  width="130px"
+                  [visible]="true"
+                  [allowEditing]="false"
+                >
+                </e-column>
+                <e-column
+                  field="source_file_name"
+                  headerText="Source FileName"
+                  filter="{ type: 'Checkbox' }"
+                  width="130px"
+                  [visible]="true"
+                  [allowEditing]="false"
+                >
+                </e-column>
+                <e-column
+                  field="file_type"
+                  headerText="File Type"
+                  filter="{ type: 'Checkbox' }"
+                  width="130px"
+                  [visible]="false"
+                  [allowEditing]="false"
+                >
+                </e-column>
+                <e-column
+                  field="title_text"
+                  headerText="Title Text"
+                  filter="{ type: 'Checkbox' }"
+                  width="130px"
+                  [visible]="true"
+                  [allowEditing]="false"
+                >
+                </e-column>
+                <e-column
+                  field="created_date"
+                  headerText="Date Created"
+                  filter="{ type: 'Checkbox' }"
+                  width="130px"
+                  [visible]="true"
+                  [validationRules]="{ required: true }"
+                  [allowEditing]="false"
+                >
+                </e-column>
+                <e-column
+                  field="hull_number_similarity"
+                  headerText="Hull Number Similarity"
+                  filter="{ type: 'Checkbox' }"
+                  width="200px"
+                  [visible]="true"
+                  [validationRules]="{ required: true }"
+                  [allowEditing]="true"
+                  editType="dropdownedit"
+                >
+                </e-column>
+                <e-column
+                  field="manual_type"
+                  headerText="Manual Type"
+                  filter="{ type: 'Checkbox' }"
+                  width="200px"
+                  [visible]="true"
+                  [validationRules]="{ required: true }"
+                  [allowEditing]="true"
+                  editType="dropdownedit"
+                >
+                </e-column>
+
+                <e-column
+                  field="appendix_pages"
+                  headerText="Appendix Pages"
+                  filter="{ type: 'Checkbox' }"
+                  width="130px"
+                  [visible]="true"
+                  [validationRules]="{ required: true }"
+                  [allowEditing]="true"
+                >
+                </e-column>
+                <e-column
+                  field="notes"
+                  headerText="Notes"
+                  filter="{ type: 'Checkbox' }"
+                  width="130px"
+                  [visible]="true"
+                  [allowEditing]="false"
+                >
+                </e-column>
+                <e-column
+                  field="screening_result"
+                  headerText="Screening Result"
+                  filter="{ type: 'Checkbox' }"
+                  width="130px"
+                  [visible]="true"
+                  [allowEditing]="false"
+                >
+                </e-column>
+                <e-column
+                  field="skipped_pages"
+                  headerText="Skipped Pages"
+                  filter="{ type: 'Checkbox' }"
+                  width="130px"
+                  [visible]="true"
+                  [allowEditing]="false"
+                >
+                </e-column>
+                <e-column
+                  field="screening"
+                  headerText="Screening Date"
+                  filter="{ type: 'Checkbox' }"
+                  width="130px"
+                  [visible]="false"
+                  [validationRules]="{ required: true }"
+                  [allowEditing]="false"
+                >
+                </e-column>
+
+                <e-column headerText="Action" width="100">
+                  <ng-template #template let-data>
+                    <button
+                      (click)="previewFile(data)"
+                      class="actionBtns ion ion-eye"
+                    ></button>
+                  </ng-template>
+                </e-column>
+              </e-columns>
+            </ejs-grid>
+          </ng-template>
+        </e-pane>
+      </e-panes>
+    </ejs-splitter>
+  </div>
+</div>

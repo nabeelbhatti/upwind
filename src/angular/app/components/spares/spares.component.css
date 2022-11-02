@@ -1,0 +1,318 @@
+.pmsProjectDetail {
+  width: 100%;
+  display: block;
+  margin: 0 auto;
+}
+.actionBtns {
+  background-color: transparent;
+  border: 1px solid transparent;
+  padding: 0px;
+  margin: 0px 5px;
+  font-size: 21px !important;
+  color: #fff;
+}
+
+.partNames {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.accordion-headerText {
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.AvailableJobs {
+  margin: 10px 0px;
+}
+
+.AccHeader {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.titleAndCheckBox {
+  width: 90%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.HeaderActions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 10%;
+}
+
+.SparetitleAndCheckBox {
+  width: 90%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.SpareHeaderActions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 10%;
+}
+.checkbox {
+  width: 90%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.CheckBoxx {
+  margin-right: 10px;
+}
+.content {
+  display: flex;
+  align-content: center;
+}
+.content > label {
+  margin-right: 10px;
+}
+.DropDowns {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+.dropdown1 {
+  width: 48% !important;
+}
+
+.jobActionsTo {
+  margin-left: 17px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 10px 0px;
+}
+.ActionButtons {
+  padding: 5px 7px;
+  border-radius: 5px;
+  border: 1px solid #f0f0f0;
+  background: transparent;
+  margin-left: 10px;
+  color: #f0f0f0;
+  font-size: 13px !important ;
+}
+
+.ActionButtons:hover {
+  border: 1px solid #f0f0f0;
+  background: transparent;
+  color: #f0f0f0;
+}
+#dropdownMenuButton {
+  padding: 5px 7px;
+  border-radius: 5px;
+  border: 1px solid #f0f0f0;
+  background: transparent;
+  margin-left: 10px;
+  color: #f0f0f0;
+  font-size: 13px !important ;
+}
+.Actions {
+  padding: 0px 10px;
+}
+.actionsToact {
+  width: 100%;
+  margin: 0 !important;
+  border: none;
+  background: none;
+  font-size: 13px !important;
+}
+.actionsToact:hover {
+  cursor: pointer;
+
+  color: blue;
+}
+.checkboxAndBulkAction {
+  padding-left: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+}
+
+.ActionButtons:hover {
+  border: 1px solid #f0f0f0;
+  color: black;
+  transition: 0.5s all;
+  background: #f0f0f0;
+}
+
+.accordionHeaderCls {
+  background-color: #f0f0f0;
+}
+
+.activeJobs {
+  overflow-y: auto;
+  max-height: 386px;
+}
+
+.activeJobs::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Track */
+.activeJobs::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+.activeJobs::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* Handle on hover */
+.activeJobs::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+.LinkedJobs {
+  overflow-y: auto;
+  max-height: 140px;
+}
+
+.LinkedJobs::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Track */
+.LinkedJobs::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+.LinkedJobs::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* Handle on hover */
+.LinkedJobs::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+.card-body {
+  background-color: transparent !important;
+}
+
+.collapseIcon {
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  margin-right: 15px;
+}
+.card {
+  background-color: transparent;
+}
+.chipsList {
+  display: flex;
+  flex-wrap: wrap;
+}
+.linked-jon {
+  background-color: #2ebf05;
+  color: #ffffff;
+}
+.linked-jon .e-acrdn-header-content {
+  color: red !important;
+}
+
+.formm {
+  padding: 10px 0px;
+}
+.inputFeilds {
+  background-color: transparent;
+  color: white;
+  font-size: 13px !important;
+  border: 1px solid;
+  height: 35px;
+}
+textarea {
+  background-color: transparent;
+  color: white;
+  font-size: 13px !important;
+  border: 1px solid;
+}
+
+.SubmitButton {
+  padding: 5px 10px;
+  background: transparent;
+  float: right;
+  color: white;
+  border: 1px solid;
+  outline: none;
+  font-size: 14px !important;
+}
+
+.FormCard {
+  padding: 7px 16px;
+  border: none !important;
+  background-color: transparent;
+}
+.blue-text {
+  color: #00bcd4;
+}
+.form-control-label {
+  margin-bottom: 0;
+}
+input,
+textarea,
+button {
+  padding: 8px 15px;
+  border-radius: 5px !important;
+  margin: 5px 0px;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  font-size: 18px !important;
+  font-weight: 300;
+}
+input:focus,
+textarea:focus {
+  -moz-box-shadow: none !important;
+  -webkit-box-shadow: none !important;
+  box-shadow: none !important;
+  border: 1px solid #00bcd4;
+  outline-width: 0;
+  font-weight: 400;
+}
+.btn-block {
+  text-transform: uppercase;
+  font-size: 15px !important;
+  font-weight: 400;
+  height: 43px;
+  border: 1px solid transparent;
+  cursor: pointer;
+}
+.btn-block:hover {
+  color: #fff !important;
+}
+
+button:focus {
+  -moz-box-shadow: none !important;
+  -webkit-box-shadow: none !important;
+  box-shadow: none !important;
+  outline-width: 0;
+}
+
+.btnDisable {
+  cursor: not-allowed !important;
+}

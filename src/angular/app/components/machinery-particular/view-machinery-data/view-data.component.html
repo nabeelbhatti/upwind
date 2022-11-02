@@ -1,0 +1,53 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col col-lg-6 col-md-5 col-sm-12 col-xs-12">
+
+            <table class="size py-2 d-flex justify-content-center" *ngIf="showPdfControls === true">
+                <tr class="d-flex align-items-center">
+                    <td class="lSize px-2">Search:</td>
+                    <td>
+                        <input #queryInp id="pdfQueryInput" type="text" placeholder="Search in pdf" [value]="pdfQuery"
+                            (input)="searchQueryChanged($event.target.value)"
+                            (keyup.enter)="searchQueryChanged(queryInp.value)" />
+                    </td>
+                    <td class="mx-1">
+                        <button (click)="prevPage()" [disabled]="page === 1" class="btn btn-sm btn-outline-light">
+                            Prev
+                        </button>
+                    </td>
+                    <td class="mx-1">{{ page }}/{{ totalPages }}</td>
+
+                    <td>
+                        <button (click)="nextPage()" [disabled]="page === totalPages"
+                            class="btn btn-sm btn-outline-light">
+                            Next
+                        </button>
+                    </td>
+                </tr>
+            </table>
+            <div *ngIf="isFetchingPDF">
+                <span>Please wait we're loading the PDF</span>
+            </div>
+            <div class="my-1" *ngIf="!isFetchingPDF">
+                <pdf-viewer [src]="pdfUrl" [original-size]="true" [show-all]="true" [(page)]="page" style="height:721px; width: 100%;"
+                            (after-load-complete)="afterLoadComplete($event)"></pdf-viewer>
+            </div>s
+        </div>
+        <div class="col col-lg-6 col-md-7 col-sm-12 col-xs-12">
+            <ejs-grid #ComponentsGrid id="ComponentsGrid" [dataSource]='SourceData2' [allowPaging]="true"
+                [filterSettings]='{ type:"CheckBox"}' [allowFiltering]='true' [allowSelection]='true'
+                [enableHover]='true' [enableHeaderFocus]='true' [allowSorting]='true' allowResizing='true'
+                showColumnChooser='true' allowReordering='true' allowPaging='true' [pageSettings]='pageSettings2'
+                locale='en-US' [editSettings]="editSettings" [toolbar]="CustomtoolbarChild"
+                (actionBegin)="onActionCompleteManualIndexFile($event)" height='585' style="margin-top: 53px !important;">
+                <e-columns>
+                    <e-column *ngFor="let column of columns" [field]="column.fieldName"
+                        [headerText]="column.displayName" [width]="column.width" clipMode='EllipsisWithTooltip'
+                        [visible]="column.visible" [isPrimaryKey]='column.isPrimaryKey === true'
+                        [validationRules]="column.validationRules">
+                    </e-column>
+                </e-columns>
+            </ejs-grid>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,182 @@
+<ejs-dialog id="AddProject-dialog" #Dialog
+    [header]="gridAction === 'delete' ? 'Delete Project' : hideSubmitButtom === true ? 'Update Project': 'Add New Project'"
+    [isModal]="true" [animationSettings]="{effect: 'None'}" [showCloseIcon]="true"
+    [width]="gridAction === 'delete' ? '550px' : '700px'" [visible]="false"
+    [height]="gridAction === 'delete' ? '170px' : '550px'" (close)="onClose()">
+    <ng-template #content>
+        <form [formGroup]="projectForm" (ngSubmit)="formSubmit()" class="form-card"
+            *ngIf="gridAction === 'add' || gridAction === 'edit'">
+            <div class="row justify-content-between text-left">
+                <div class="form-group mb-2 col-sm-6 flex-column d-flex">
+                    <label class="form-control-label ">Client<span class="text-danger"> *</span></label>
+                    <ejs-dropdownlist id="clientName" formControlName="clientName" class="inputFeilds px-1 mt-1" #sample
+                        [dataSource]="allCategories?.Client" [fields]="{text: 'name',value: '_id'}"
+                        [popupHeight]="'200px'" [placeholder]="'Select Client'" sortOrder="Ascending"
+                        (change)="getValues($event)" [readonly]="hideSubmitButtom === true"
+                        [style.border-color]="hideSubmitButtom === true ? 'grey': 'white'">
+                    </ejs-dropdownlist>
+                    <div *ngIf="hideSubmitButtom === false">
+                        <small *ngIf="clientName?.invalid && clientName.touched" class="text-danger">Client is
+                            required</small>
+                    </div>
+                </div>
+                <div class="form-group mb-2 col-sm-6 flex-column d-flex">
+                    <label class="form-control-label ">Vessel Name<span class="text-danger"> *</span></label>
+                    <ejs-dropdownlist id="vesselName" formControlName="vesselName" class="inputFeilds px-1 mt-1" #sample
+                        [dataSource]="allCategories?.Vessel" [fields]="{text: 'name',value: '_id'}"
+                        [popupHeight]="'200px'" [placeholder]="'Select Vessel'" sortOrder="Ascending"
+                        (change)="getValues($event)" [readonly]="hideSubmitButtom === true"
+                        [style.border-color]="hideSubmitButtom === true ? 'grey': 'white'">
+                    </ejs-dropdownlist>
+                    <div *ngIf="hideSubmitButtom === false">
+                        <small *ngIf="vesselName?.invalid && vesselName?.touched" class="text-danger">Vessel Name is
+                            required</small>
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-between text-left">
+                <div class="form-group mb-2 col-sm-6 flex-column d-flex">
+                    <label class="form-control-label ">Vessel Type<span class="text-danger"> *</span></label>
+                    <ejs-dropdownlist id="customers" formControlName="vesselType" class="inputFeilds px-1 mt-1" #sample
+                        [dataSource]="allCategories?.VesselType" [fields]="{text: 'name',value: '_id'}"
+                        [popupHeight]="'200px'" [placeholder]="'Select Vessel Name'" sortOrder="Ascending"
+                        [readonly]="DisableButton === true"
+                        [style.border-color]="DisableButton === true ? 'grey': 'white'">
+                    </ejs-dropdownlist>
+
+                    <div *ngIf=" DisableButton === false ">
+                        <small *ngIf="vesselType?.invalid && vesselType?.touched" class="text-danger">Vessel Type is
+                            required</small>
+                    </div>
+                </div>
+                <div class="form-group mb-2 col-sm-6 flex-column d-flex">
+                    <label class="form-control-label ">Category</label>
+                    <ejs-dropdownlist id="customers" formControlName="category" class="inputFeilds px-1 mt-1" #sample
+                        [dataSource]="allCategories?.Categories" [fields]="{text: 'name',value: '_id'}"
+                        [popupHeight]="'200px'" [placeholder]="'Select Category Name'" sortOrder="Ascending"
+                        [readonly]="DisableButton === true"
+                        [style.border-color]="DisableButton === true ? 'grey': 'white'">
+                    </ejs-dropdownlist>
+                </div>
+            </div>
+            <div class="row justify-content-between text-left">
+                <div class="form-group mb-2 col-sm-6 flex-column d-flex">
+                    <label class="form-control-label ">Type of Building</label>
+                    <ejs-dropdownlist id="customers" formControlName="typeOfBuilding" class="inputFeilds px-1 mt-1"
+                        #sample [dataSource]="allCategories?.BuildingTypes" [fields]="{text: 'name',value: '_id'}"
+                        [popupHeight]="'200px'" [placeholder]="'Select Type of Building'" sortOrder="Ascending"
+                        [readonly]="DisableButton === true"
+                        [style.border-color]="DisableButton === true ? 'grey': 'white'">
+                    </ejs-dropdownlist>
+                </div>
+                <div class="form-group mb-2 col-sm-6 flex-column d-flex">
+                    <label class="form-control-label ">Est.Start Date</label>
+                    <input type="date" class="inputFeilds" id="estStartDate" name="estStartDate"
+                        formControlName="estStartDate" placeholder="" [readonly]="DisableButton === true"
+                        [style.border-color]="DisableButton === true ? 'grey': 'white'" />
+                </div>
+            </div>
+            <div class="row justify-content-between text-left">
+                <div class="form-group mb-2 col-sm-6 flex-column d-flex">
+                    <label class="form-control-label ">Assignee</label>
+                    <ejs-multiselect id='multiselect-checkbox' formControlName="assignee" class="inputFeilds px-1 mt-1"
+                        #sample2 [dataSource]="allCategories?.pmsmanager" [fields]="{text: 'name',value: '_id'}"
+                        [popupHeight]="'200px'" [placeholder]="'Select Assignee'" sortOrder="Ascending"
+                        [readonly]="DisableButton === true" [mode]="'CheckBox'" showSelectAll='true'
+                        [style.border-color]="DisableButton === true ? 'grey': 'white'">
+                    </ejs-multiselect>
+                </div>
+                <div class="form-group mb-2 col-sm-6 flex-column d-flex">
+                    <label class="form-control-label ">Est.End Date</label>
+                    <input type="date" class="inputFeilds" id="estEndDate" name="estEndDate"
+                        formControlName="estEndDate" placeholder="" [readonly]="DisableButton === true"
+                        [style.border-color]="DisableButton === true ? 'grey': 'white'" />
+                </div>
+            </div>
+            <div class="row justify-content-between text-left">
+                <div class="form-group col-sm-12 flex-column d-flex">
+                    <label class="form-control-label ">SharePointLink</label>
+                    <textarea type="text" id="url" name="url" formControlName="url" class="inputFeilds" rows="3"
+                        [readonly]="DisableButton === true"
+                        [style.border-color]="DisableButton === true ? 'grey': 'white'"></textarea>
+                </div>
+            </div>
+            <div class="row justify-content-end">
+                <div *ngIf="hideSubmitButtom === false"
+                    class="form-group mb-2 d-flex  align-items-center justify-content-end col-sm-6">
+                    <button type="button" class="SubmitButton" (click)="formSubmit()"
+                        [disabled]="DisableButton === true"
+                        [style.background-color]="DisableButton === true ? 'grey': ''">Save</button>
+                </div>
+                <div *ngIf="hideSubmitButtom === true"
+                    class="form-group mb-2 d-flex  align-items-center justify-content-end col-sm-6">
+                    <button type="button" class="SubmitButton" (click)="updateForm()">Update</button>
+                </div>
+            </div>
+        </form>
+        <div *ngIf="gridAction === 'delete'">
+            <label>
+                Are you sure you want to delete
+            </label>
+            <div class="row justify-content-end">
+                <div class="form-group mb-2 d-flex  align-items-center justify-content-end col-sm-6">
+                    <button type="button" class="SubmitButton" (click)="onDeletePmsProject(null, true)">Yes</button>
+                </div>
+            </div>
+        </div>
+    </ng-template>
+</ejs-dialog>
+<div class="grid-header d-flex">
+    <div class="external-filters">
+        <span>
+            <label class="form-control-label ">Client</label>
+            <ejs-multiselect id="clientName" [dataSource]="allCategories?.Client"
+                [fields]="{text: 'name',value: 'name'}" [popupHeight]="'200px'" [popupWidth]="'200px'"
+                sortOrder="Ascending" [mode]="'CheckBox'" showSelectAll='true' (change)='onFiletrApply($event)'>
+            </ejs-multiselect>
+        </span>
+        <span>
+            <label class="form-control-label ">Vessel</label>
+            <ejs-multiselect id="stage" [dataSource]="allCategories?.Stage"
+                [fields]="{text: 'name',value: 'name'}" [popupHeight]="'200px'" [popupWidth]="'200px'"
+                sortOrder="Ascending" [mode]="'CheckBox'" showSelectAll='true'(change)='onFiletrApply($event)'>
+            </ejs-multiselect>
+        </span>
+        <span>
+            <label class="form-control-label ">Status</label>
+            <ejs-multiselect id="status" [dataSource]="allCategories?.Status"
+                [fields]="{text: 'name',value: 'name'}" [popupHeight]="'200px'" [popupWidth]="'200px'"
+                sortOrder="Ascending" [mode]="'CheckBox'" showSelectAll='true'(change)='onFiletrApply($event)'>
+            </ejs-multiselect>
+        </span>
+        <span>
+            <label class="form-control-label ">Assignee</label>
+            <ejs-multiselect id="assignee" [dataSource]="allCategories?.pmsmanager"
+                [fields]="{text: 'name',value: 'name'}" [popupHeight]="'200px'" [popupWidth]="'200px'"
+                sortOrder="Ascending" [mode]="'CheckBox'" showSelectAll='true'(change)='onFiletrApply($event)'>
+            </ejs-multiselect>
+        </span>
+    </div>
+    <div style="width: 25%;">
+        <button class="SubmitButton" data-ripple="true" (click)="dialogEle.show(); gridAction = 'add'">Add
+            Project</button>
+    </div>
+</div>
+<ejs-grid #overviewgrid id='overviewgrid' [dataSource]='data' rowHeight='38' [allowSelection]='true' height="350"
+    [enableHover]='false' [enableHeaderFocus]='true' [filterSettings]='{ type:"CheckBox"}' [allowFiltering]='true'
+    [allowSorting]='true' allowResizing='true' [allowExcelExport]='true'
+    [allowPdfExport]='true' [toolbar]='toolbar' (toolbarClick)='toolbarClick($event)' allowReordering='true'
+    (excelQueryCellInfo)='exportQueryCellInfo($event)' (pdfQueryCellInfo)='exportQueryCellInfo($event)'
+    allowPaging='true' [pageSettings]='initialPage' locale='en-US' showColumnChooser='true'>
+    <e-columns>
+        <e-column *ngFor="let column of columns" [field]="column.fieldName" [headerText]="column.displayName"
+            [width]="column.width" clipMode='EllipsisWithTooltip' [visible]="column.visible">
+        </e-column>
+        <e-column headerText="Action" freeze='Right' width="100">
+            <ng-template #template let-data>
+                <i class="actionBtns fa-solid fa-pen" (click)="onEditPmsProject(data)"></i>
+                <i class="actionBtns ion ion-ios-trash-outline" (click)="onDeletePmsProject(data)"></i>
+            </ng-template>
+        </e-column>
+    </e-columns>
+</ejs-grid>

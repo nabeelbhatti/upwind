@@ -1,0 +1,101 @@
+<div class="formm">
+  <div class="FormCard mt-1">
+    <form [formGroup]="exform" (ngSubmit)="onSubmit()" class="form-card">
+      <div class="row justify-content-between text-left">
+        <div class="form-group mb-2 col-sm-12 flex-column d-flex">
+          <label for="Components">Component</label>
+          <ejs-multiselect
+            formControlName="Components"
+            id="multiselectelement"
+            [dataSource]="components"
+            [placeholder]="placeholder"
+            [popupHeight]="popupHeight"
+            [popupWidth]="popupWidth"
+            (select)="changeComponent($event)"
+          ></ejs-multiselect>
+
+          <small
+            *ngIf="Components.invalid && Components.touched"
+            class="text-danger"
+            >Components is required</small
+          >
+        </div>
+
+        <div class="form-group mb-2 col-sm-12 flex-column d-flex">
+          <label for="MakersName">Makers </label>
+          <!-- <ejs-multiselect
+            formControlName="MakersName"
+            id="multiselectelement"
+            [dataSource]="singleOcrData?.makers"
+            placeholder="Select Maker"
+            [popupHeight]="popupHeight"
+            [popupWidth]="popupWidth"
+          ></ejs-multiselect> -->
+
+          <ejs-multiselect
+            formControlName="MakersName"
+            id="multiselectelement"
+            [dataSource]="makers"
+            placeholder="Select Maker"
+            [popupHeight]="popupHeight"
+            [popupWidth]="popupWidth"
+            (select)="changeMaker($event)"
+          ></ejs-multiselect>
+          <small
+            *ngIf="MakersName.invalid && MakersName.touched"
+            class="text-danger"
+            >Maker Name is required</small
+          >
+        </div>
+      </div>
+
+      <div class="row justify-content-between text-left">
+        <div class="form-group mb-2 col-sm-12 flex-column d-flex">
+          <label for="ModelName">Model </label>
+
+          <!-- <ejs-multiselect
+            formControlName="ModelName"
+            id="multiselectelementt"
+            [dataSource]="singleOcrData.model_names"
+            placeholder="Select Model"
+            [popupHeight]="popupHeight"
+            [popupWidth]="popupWidth"
+          ></ejs-multiselect> -->
+
+          <ejs-multiselect
+            formControlName="ModelName"
+            id="multiselectelementt"
+            [dataSource]="models"
+            placeholder="Select Model"
+            [popupHeight]="popupHeight"
+            [popupWidth]="popupWidth"
+            (select)="changeModal($event)"
+
+          ></ejs-multiselect>
+
+          <small
+            *ngIf="ModelName.invalid && ModelName.touched"
+            class="text-danger"
+            >Model is required</small
+          >
+        </div>
+      </div>
+
+      <div class="row justify-content-end">
+        <div
+          class="form-group mb-2 d-flex  align-items-center justify-content-end col-sm-6"
+        >
+          <button
+            [disabled]="exform.invalid"
+            type="submit"
+            [class]="
+              exform.invalid ? 'SubmitButton btnDisable' : 'SubmitButton'
+            "
+          >
+            View Jobs
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

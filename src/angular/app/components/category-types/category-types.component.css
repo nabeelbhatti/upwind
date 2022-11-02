@@ -1,0 +1,29 @@
+.actionBtns {
+  background-color: transparent;
+  border: 1px solid transparent;
+  padding: 0px;
+  margin: 0px 5px;
+  font-size: 25px;
+  color: #fff;
+  outline: none;
+}
+.CategoryTypesList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.Category {
+  margin: 10px 0px;
+  height: 30px;
+}
+
+.CategoryTypes {
+  font-size: 20px;
+  display: flex;
+  justify-content: space-between;
+  width: 260px;
+}
+.CategoryTypes:hover > .Category {
+  cursor: pointer;
+  color: #007bff;
+}

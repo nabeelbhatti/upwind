@@ -1,0 +1,228 @@
+/* You can add global styles to this file, and also import other style files */
+@import '../../node_modules/@syncfusion/ej2-base/styles/material-dark.css';
+@import '../../node_modules/@syncfusion/ej2-buttons/styles/material-dark.css';
+@import '../../node_modules/@syncfusion/ej2-popups/styles/material-dark.css';
+@import '../../node_modules/@syncfusion/ej2-calendars/styles/material-dark.css';
+@import '../../node_modules/@syncfusion/ej2-dropdowns/styles/material-dark.css';
+@import '../../node_modules/@syncfusion/ej2-inputs/styles/material-dark.css';
+@import '../../node_modules/@syncfusion/ej2-navigations/styles/material-dark.css';
+@import '../../node_modules/@syncfusion/ej2-splitbuttons/styles/material-dark.css';
+@import '../../node_modules/@syncfusion/ej2-angular-grids/styles/material-dark.css';
+
+/* Dropdown */
+
+@import '../../node_modules/@syncfusion/ej2-dropdowns/styles/material-dark.css';
+@import '../../node_modules/@syncfusion/ej2-inputs/styles/material-dark.css';
+@import '../../node_modules/@syncfusion/ej2-lists/styles/material-dark.css';
+@import '../../node_modules/@syncfusion/ej2-angular-dropdowns/styles/material-dark.css';
+
+@import '../../node_modules/@syncfusion/ej2-angular-navigations/styles/material-dark.css';
+@import '../../node_modules/@syncfusion/ej2-inputs/styles/material-dark.css';
+
+@import '../../node_modules/@syncfusion/ej2-angular-lists/styles/material-dark.css';
+
+@import '../../node_modules/@syncfusion/ej2-angular-base/styles/material.css';
+@import '../../node_modules/@syncfusion/ej2-angular-buttons/styles/material.css';
+
+@import '../../node_modules/@syncfusion/ej2-base/styles/material.css';
+@import '../../node_modules/@syncfusion/ej2-icons/styles/material.css';
+@import '../../node_modules/@syncfusion/ej2-buttons/styles/material.css';
+@import '../../node_modules/@syncfusion/ej2-angular-layouts/styles/material.css';
+#loader {
+  color: #008cff;
+  height: 40px;
+  left: 45%;
+  position: absolute;
+  top: 45%;
+  width: 30%;
+}
+
+.control_wrapper {
+  max-width: 500px;
+  min-width: 245px;
+  margin: auto;
+}
+
+#container
+  .e-control
+  .e-upload-files
+  .e-file-container
+  .e-progress-inner-wrap
+  .e-upload-progress {
+  background: yellow;
+  height: 4px;
+}
+
+#container .e-control .e-upload-files .e-file-container .e-progress-inner-wrap {
+  height: 4px;
+  background-color: lightblue;
+}
+
+#animationDialog {
+  height: 99px;
+}
+
+a {
+  color: #00affe !important;
+  font-weight: bold;
+}
+a.e-link {
+  color: black !important;
+}
+
+.choices__list--dropdown .choices__item--selectable.is-highlighted {
+  background-color: #f2f2f2 !important;
+}
+
+.choices__list.choices__list--dropdown {
+  background-color: #697392;
+}
+
+button.actionBtns:disabled {
+  color: #9e9e9e !important;
+  cursor: not-allowed;
+}
+#dropDownForType {
+  width: 51% !important;
+}
+.e-acrdn-header-content {
+  width: 100%;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #e9ecef;
+  border-radius: 5px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #555555;
+  border-radius: 5px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+#component-dialog {
+  top: 100px !important;
+  left: 90px !important;
+  position: absolute !important;
+}
+
+#AddProject-dialog {
+  top: 100px;
+}
+#AddProject-dialog .e-dialog .e-dlg-content {
+  overflow-y: scroll;
+  overflow-x: hidden;
+  height: 400px;
+}
+
+#AddProject-dialog_dialog-content {
+  height: 400px !important;
+}
+
+#component-dialog.e-dialog .e-dlg-content {
+  max-height: 480px;
+  /* overflow: hidden; */
+}
+#tab_default {
+  border-bottom: 1px solid #00b0ff;
+}
+
+/* .e-tab .e-tab-header .e-toolbar-item.e-active {
+  border-bottom: 3px solid #00b0ff !important;
+  border-radius: 0;
+} */
+/* .e-tab .e-tab-header .e-toolbar-item.e-active */
+.e-treeview .e-list-text {
+  width: 100%;
+}
+.e-pager .e-numericitem {
+  color: white !important;
+}
+
+.formio-component-textfield {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+.formio-component-select {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+.form-control {
+  font-size: 13px !important;
+}
+
+.formio-component-datetime {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.formio-component-button {
+  float: right !important;
+  margin-top: 10px !important;
+}
+.col-form-label {
+  font-size: 13px !important;
+}
+
+#tab_default_tab_header_items .e-tab .e-tab-header .e-toolbar-item.e-active {
+  border: 1px solid transparent;
+  border-radius: 0;
+}
+
+#tab_default .e-active {
+  border-width: 0 0 2px 0 !important;
+  border-radius: 0;
+}
+
+.dropdown1 .e-input {
+  font-size: 13px !important;
+}
+
+input::placeholder {
+  font-size: 13px !important;
+}
+
+input[disabled] {
+  cursor: not-allowed !important;
+  opacity: 0.6;
+  background: red;
+}
+
+.scrollable a.active {
+  color: blue !important;
+}
+
+.scrollable a.active .menu-icon {
+  color: blue !important;
+}
+
+/* Top bar height reduced - default value was 4.75rem */
+.layout > nb-layout-header > nav {
+  height: 2.5rem;
+}
+.layout-container {
+  padding-top: 2.5rem !important;
+}
+nb-sidebar .main-container-fixed {
+  top: 2rem !important;
+}
+/* Top bar width reduced - default value was 16rem */
+/* nb-sidebar,
+nb-sidebar .main-container {
+  width: 14rem !important;
+} */
+
+.btn-link {
+  text-decoration: none;
+}

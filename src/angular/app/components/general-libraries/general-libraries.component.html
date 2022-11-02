@@ -1,0 +1,36 @@
+<div class="header">
+    <div class="dropdown">
+        <div class="mb-3 mt-3 d-flex justify-content-start align-items-center">
+            <label for="library-dropdown" class="form-label mr-4">Select:</label>
+            <ejs-dropdownlist id="library-dropdown" *ngIf="libraryDropdownData" 
+                [dataSource]="libraryDropdownData"
+                (change)="selectLibrary($event)" 
+                [fields]="libraryDropdownFields" 
+                width="100%"
+                [value]="selectedLibrary" 
+                [popupHeight]="filterPopupHeight"
+            ></ejs-dropdownlist>
+        </div>
+    </div>
+</div>
+
+<div class="grid">
+    <ejs-grid 
+        #grid 
+        [dataSource]="libraryData" 
+        [allowPaging]="true" 
+        [allowFiltering]="true"
+        [filterSettings]="filterSettings" 
+        [toolbar]="toolbarItems" 
+        [allowSorting]="true"
+        [allowExcelExport]="true"
+        [allowPdfExport]="true"
+        [editSettings]="editSettings"
+        (toolbarClick)="toolbarClick($event)"
+        (actionBegin)="actionBegin($event)"
+    >
+        <e-columns *ngIf="(libraryData && libraryData[0] | keyvalue) as columns">
+            <e-column *ngFor="let column of columns" [field]="column.key" [headerText]="column.key" width="150" textAlign="Right" [visible]="column.key !== '_id'" ></e-column>
+        </e-columns>
+    </ejs-grid>
+</div>

@@ -1,0 +1,40 @@
+<div class="client-drpdwn">
+    <label class="form-control-label">Client</label>
+    <ejs-dropdownlist id="ClientName" class="inputFeilds px-1 mt-1" 
+        [placeholder]="'Select Client'"
+        [dataSource]="allLibraryData?.Client" 
+        [fields]="{text: 'name',value: '_id'}" 
+        [popupHeight]="'200px'"
+        sortOrder="Ascending" 
+        (change)="onClientChanges($event)"></ejs-dropdownlist>
+</div>
+<ejs-grid #overviewgrid id='overviewgrid' 
+        [rowHeight]="gridConfig.rowHeight"
+        [height]="gridConfig.height"
+        [allowResizing]="gridConfig.allowResizing"
+        [allowReordering]="gridConfig.allowReordering"
+        [allowPaging]="gridConfig.allowPaging"
+        locale='en-US'
+        [dataSource]="FSDData"  
+        [allowSelection]="gridConfig.allowSelection" 
+        [enableHover]="gridConfig.enableHover" 
+        [enableHeaderFocus]="gridConfig.enableHeaderFocus"
+        [filterSettings]="gridConfig.filterSetting" 
+        [allowFiltering]="gridConfig.allowFiltering"
+        [allowSorting]="gridConfig.allowSorting"    
+        [toolbar]='toolbar' 
+        [editSettings]="gridConfig.editSettings" 
+        (actionBegin)="gridActions($event)">
+    <e-columns>
+        <e-column *ngFor="let column of columnsJSON" 
+                [field]="column.fieldName" 
+                [headerText]="column.displayName"
+                [width]="column.width" 
+                clipMode='EllipsisWithTooltip' 
+                [visible]="column.visible"
+                [validationRules]="column.validationRules" 
+                [editType]="column.editType" 
+                [edit]="column.editParam"
+                [isPrimaryKey]="!column.isEditables"></e-column>
+    </e-columns>
+</ejs-grid>

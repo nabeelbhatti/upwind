@@ -1,0 +1,183 @@
+.actionBtns {
+  background-color: transparent;
+  border: 1px solid transparent;
+  padding: 0px;
+  margin: 0px 5px;
+  font-size: 25px;
+  color: #fff;
+}
+
+.editBtn {
+  background-color: transparent;
+}
+.buttonprojectPms {
+  width: 100%;
+  height: auto;
+  padding: 10px 0px;
+  display: flex;
+  justify-content: flex-end;
+}
+.e-dlg-target.e-scroll-disabled {
+  overflow: auto !important;
+}
+
+.e-dlg-container {
+  position: absolute !important;
+}
+
+.formtitle {
+  width: 100%;
+  text-align: center;
+  padding: 10px;
+  font-size: 16px;
+  font-weight: 500;
+  color: rgba(0, 0, 0, 0.7);
+}
+
+.e-error,
+.e-float-text {
+  font-weight: 500;
+}
+
+.e-custom-label {
+  font-size: 14px;
+  font-weight: 500;
+  margin-left: 20px;
+}
+
+.highcontrast form,
+.highcontrast .header {
+  color: #fff;
+  background: #000000;
+}
+
+.header {
+  color: rgba(0, 0, 0, 0.7);
+}
+
+table,
+td,
+th {
+  padding: 5px;
+}
+/* 
+.form-horizontal .form-group {
+  margin-left: 20px;
+  margin-right: 20px;
+} */
+
+/* .row {
+  padding-bottom: 30px;
+  padding-top: 25px;
+} */
+/* <!-- custom code end --> */
+
+.control-section #component-dialog {
+  top: 0% !important;
+}
+.dlgbtn {
+  margin-right: 10px;
+}
+.control-section {
+  height: 100%;
+  /* min-height: 350px; */
+}
+/* <!-- custom code end --> */
+
+#myProgress {
+  border: 1px solid black;
+  width: 100%;
+  position: relative;
+}
+#myBar {
+  width: 20%;
+  height: 100%;
+  background-color: #00b300;
+}
+#myBar.progressdisable {
+  background-color: #00b300;
+  height: 20px;
+}
+#label {
+  position: absolute;
+  left: 45%;
+  top: 9%;
+  line-height: 18px;
+  font-size: 10px;
+  color: black;
+}
+
+.formm {
+  padding: 10px 0px;
+}
+.inputFeilds {
+  background-color: transparent;
+  color: white;
+  font-size: 13px !important;
+  border: 1px solid;
+  height: 35px;
+}
+
+.SubmitButton {
+  padding: 5px 10px;
+  background: transparent;
+  float: right;
+  color: white;
+  border: 1px solid;
+  outline: none;
+  font-size: 14px !important;
+}
+
+.FormCard {
+  padding: 7px 16px;
+  border: none !important;
+  background-color: transparent;
+}
+.blue-text {
+  color: #00bcd4;
+}
+.form-control-label {
+  margin-bottom: 0;
+}
+input,
+textarea,
+button {
+  padding: 8px 15px;
+  border-radius: 5px !important;
+  margin: 5px 0px;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  font-size: 18px !important;
+  font-weight: 300;
+}
+input:focus,
+textarea:focus {
+  -moz-box-shadow: none !important;
+  -webkit-box-shadow: none !important;
+  box-shadow: none !important;
+  border: 1px solid #00bcd4;
+  outline-width: 0;
+  font-weight: 400;
+}
+.btn-block {
+  text-transform: uppercase;
+  font-size: 15px !important;
+  font-weight: 400;
+  height: 43px;
+  border: 1px solid transparent;
+  cursor: pointer;
+}
+.btn-block:hover {
+  color: #fff !important;
+}
+
+button:focus {
+  -moz-box-shadow: none !important;
+  -webkit-box-shadow: none !important;
+  box-shadow: none !important;
+  outline-width: 0;
+}
+
+.btnDisable {
+  cursor: not-allowed !important;
+}

@@ -1,0 +1,324 @@
+<div class="pt-2">
+  <h6 class="py-2">Avaiable Jobs</h6>
+  <div
+    class="activeJobs"
+    infiniteScroll
+    [infiniteScrollDistance]="1"
+    [infiniteScrollThrottle]="50"
+    (scrolled)="onScroll()"
+    [scrollWindow]="false"
+  >
+    <div class="DropDowns">
+      <!-- <div class="dropdown1">
+        <select id="selectClient" #teams
+        (change)="selectJob($event.target.value)">
+          <option value="none" selected>Select a Job Source</option>
+          <option *ngFor="let sport of sportsData" [value]="sport.value">
+            {{sport.label}}
+          </option>
+        </select>
+      </div> -->
+
+      <div class="dropdown1" *ngIf="!updatingView">
+        <select
+          id="selectClient"
+          #teams
+          (change)="selectJob($event.target.value)"
+          [value]="selectedClient"
+
+        >
+          <option value="">Select Client</option>
+          <option *ngFor="let client of clients" [selected]="selectedClient===client.value" [ngValue]="client.value">
+            {{ client.label }}
+          </option>
+        </select>
+        <!-- <ejs-dropdownlist
+          id="customers"
+
+          [dataSource]="clients"
+          [fields]="clientField"
+          [popupHeight]="filterPopupHeight"
+          [placeholder]="clientWaterMark"
+          sortOrder="Ascending"
+        ></ejs-dropdownlist> -->
+      </div>
+    </div>
+    <div class="jobActionsTo">
+      <div class="checkboxAndBulkAction">
+        <input
+          (change)="selectAllJobs($event)"
+          type="checkbox"
+          name="checkbox"
+          id="checkbox2"
+          class="mr-2"
+          placeholder=""
+          [checked]="allJobsSelected"
+        />
+        <div class="dropdown">
+          <button
+            class="DropDownBtn"
+            class="dropdown-toggle"
+            type="button"
+            id="dropdownMenuButton"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >
+            Bulk Action
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <button class="actionsToact">Delete Selected</button>
+            <button class="actionsToact" (click)="linkJobs()">Link Selected</button>
+            <button (click)="unlinkAllJobs()" class="actionsToact">Unlink Selected</button>
+          </div>
+        </div>
+      </div>
+      <div class="Actions">
+        <button
+          *ngIf="showJobForm === true"
+          type="button"
+          (click)="closejobFormFunction()"
+          class="ActionButtons"
+        >
+          Hide Form
+        </button>
+        <button
+          type="button"
+          *ngIf="showJobForm === false"
+          (click)="showJobFormFunction()"
+          class="ActionButtons"
+        >
+          Add Job</button
+        ><button class="ActionButtons">Expand all</button>
+      </div>
+    </div>
+    <div class="FormCard" *ngIf="showJobForm">
+      <h5 class="text-center mb-4">
+        Add New Job
+      </h5>
+      <form
+        [formGroup]="addJobForm"
+        (ngSubmit)="addJobSubmit()"
+        class="form-card"
+      >
+        <div class="row justify-content-between text-left">
+          <div class="form-group mb-2 col-sm-6 flex-column d-flex">
+            <label class="form-control-label "
+              >Jibe Job Title<span class="text-danger"> *</span></label
+            >
+            <input
+              type="text"
+              class="inputFeilds"
+              id="jibeJobtitle"
+              name="jibeJobtitle"
+              formControlName="jibeJobtitle"
+            />
+            <small
+              *ngIf="jibeJobtitle.invalid && jibeJobtitle.touched"
+              class="text-danger"
+              >Jibe Job title is required</small
+            >
+          </div>
+          <div class="form-group mb-2 col-sm-6 flex-column d-flex">
+            <label class="form-control-label "
+              >Frequency<span class="text-danger"> *</span></label
+            >
+            <input
+              type="text"
+              class="inputFeilds"
+              id="frequency"
+              name="frequency"
+              formControlName="frequency"
+            />
+            <small
+              *ngIf="frequency.invalid && frequency.touched"
+              class="text-danger"
+              >frequency is required</small
+            >
+          </div>
+        </div>
+        <div class="row justify-content-between text-left">
+          <div class="form-group mb-2 col-sm-6 flex-column d-flex">
+            <label class="form-control-label "
+              >Frequency Type<span class="text-danger"> *</span></label
+            >
+            <input
+              type="text"
+              class="inputFeilds"
+              id="frequencyType"
+              name="frequencyType"
+              formControlName="frequencyType"
+              placeholder=""
+            />
+            <small
+              *ngIf="frequencyType.invalid && frequencyType.touched"
+              class="text-danger"
+              >Frequency Type is required</small
+            >
+          </div>
+          <div class="form-group mb-2 col-sm-6 flex-column d-flex">
+            <label class="form-control-label "
+              >Job Action<span class="text-danger"> *</span></label
+            >
+            <input
+              type="text"
+              class="inputFeilds"
+              id="jobAction"
+              name="jobAction"
+              formControlName="jobAction"
+              placeholder=""
+            />
+            <small
+              *ngIf="jobAction.invalid && jobAction.touched"
+              class="text-danger"
+              >Job Action is required</small
+            >
+          </div>
+        </div>
+
+        <div class="row justify-content-between text-left">
+          <div class="form-group mb-2 col-12 flex-column d-flex">
+            <label class="form-control-label "
+              >Description<span class="text-danger"> *</span></label
+            >
+            <textarea
+              type="text"
+              id="jobDescription"
+              name="jobDescription"
+              formControlName="jobDescription"
+              placeholder=""
+            ></textarea>
+            <small
+              *ngIf="jobDescription.invalid && jobDescription.touched"
+              class="text-danger"
+              >Job Description is required</small
+            >
+          </div>
+        </div>
+        <div class="row justify-content-end">
+          <div
+            class="form-group mb-2 d-flex  align-items-center justify-content-between col-sm-12"
+          >
+            <button
+              [disabled]="addJobForm.invalid"
+              type="submit"
+              [class]="
+                addJobForm.invalid ? 'SubmitButton btnDisable' : 'SubmitButton'
+              "
+            >
+              Submit
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div *ngIf="updatingView">
+      <div class="spinner-border text-primary" role="status">
+        <span class="sr-only">Loading...</span>
+      </div>
+    </div>
+    <div *ngIf="jobsFound === undefined">
+      <h3 class="tex-centre">No Jobs Found</h3>
+    </div>
+    <ejs-accordion *ngIf="!updatingView">
+      <e-accordionitems>
+        <e-accordionitem
+          [cssClass]="calcCss(job) ? 'linked-jon' : ''"
+          *ngFor="let job of jobsFound"
+        >
+          <ng-template
+            style="background-color: red"
+            class="accordionHeaderCls"
+            #header
+          >
+            <div class="AccHeader">
+              <div class="titleAndCheckBox">
+                <div class="checkbox">
+                  <label
+                    ><input
+                      (change)="selectSingleJob($event, job._id)"
+                      class="CheckBoxx"
+                      type="checkbox"
+                      value=""
+                      [checked]="job.checked"
+                    />{{ job.job_name }} | {{ job.frequency
+                    }}{{ job.frequency_type_code }}</label
+                  >
+                </div>
+              </div>
+              <div class="HeaderActions">
+                <!-- <button
+                  (click)="deleteSingleJob(job._id)"
+                  class="actionBtns ion ion-ios-trash"
+                  type="button"
+                ></button> -->
+
+
+                
+                  <button
+                    *ngIf="calcCss(job) === true"
+                    type="button"
+                    (click)="unlinkSingleJob(job._id)"
+                    class="actionBtns ion ion-close"
+                  ></button>
+                  <button
+                    *ngIf="calcCss(job) === false"
+                    type="button"
+                    (click)="linkSingleJob(job._id)"
+                    class="actionBtns ion ion-checkmark"
+                  ></button>
+                </div>
+              </div>
+            </ng-template>
+            <ng-template #content>
+              <div class="accridioContent">
+                <div class="content">
+                  <label>Job Title :</label>
+                  <p class="Data">{{ job.job_name }}</p>
+                </div>
+                <div class="content">
+                  <label>Department :</label>
+                  <p class="Data">Data</p>
+                </div>
+                <div class="content">
+                  <label>Performing Rank :</label>
+                  <p class="Data">Data</p>
+                </div>
+                <div class="content">
+                  <label>Verifying Rank :</label>
+                  <p class="Data">Data</p>
+                </div>
+                <div class="content">
+                  <label>CMS ID :</label>
+                  <p class="Data">{{ job.cms_code }}</p>
+                </div>
+                <div class="content">
+                  <label>Critical Marking :</label>
+                  <p class="Data">Data</p>
+                </div>
+                <div class="content">
+                  <label>Frequency :</label>
+                  <p class="Data">{{ job.frequency }}</p>
+                </div>
+
+                <div class="content">
+                  <label>Frequency Type :</label>
+                  <p class="Data">
+                    {{ job.frequency_type_code }}
+                  </p>
+                </div>
+                <div class="content">
+                  <label>Description :</label>
+                  <p class="Data">{{ job.job_description }}</p>
+                </div>
+                <div class="content">
+                  <label>Job Action :</label>
+                  <p class="Data">Data</p>
+                </div>
+              </div>
+            </ng-template>
+          </e-accordionitem>
+        </e-accordionitems>
+      </ejs-accordion>
+</div>
+</div>

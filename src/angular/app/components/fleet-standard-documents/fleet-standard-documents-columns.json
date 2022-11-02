@@ -1,0 +1,113 @@
+{
+    "columns": [
+        {
+            "fieldName": "_id",
+            "displayName": "FSD_ID",
+            "filter": {
+                "type": "Checkbox"
+            },
+            "width": "150px",
+            "visible": false,
+            "isEditables": false
+        },
+        {
+            "fieldName": "client.name",
+            "displayName": "Client",
+            "filter": {
+                "type": "Checkbox"
+            },
+            "width": "150px",
+            "visible": true,
+            "isEditables": false
+        },
+        {
+            "fieldName": "doc_type.name",
+            "displayName": "Doc Type",
+            "filter": {
+                "type": "Checkbox"
+            },
+            "width": "150px",
+            "visible": true,
+            "isEditables": false
+        },
+        {
+            "fieldName": "share_point_link",
+            "displayName": "SharePoint Linkl",
+            "filter": {
+                "type": "Checkbox"
+            },
+            "width": "150px",
+            "visible": true,
+            "isEditables": true,
+            "validationRules": {"maxLength": 1000}
+        },
+        {
+            "fieldName": "file_name",
+            "displayName": "File Name",
+            "filter": {
+                "type": "Checkbox"
+            },
+            "width": "150px",
+            "visible": true,
+            "isEditables": true,
+            "validationRules": {"maxLength": 150}
+        },
+        {
+            "fieldName": "version_number",
+            "displayName": "Version No.",
+            "filter": {
+                "type": "Checkbox"
+            },
+            "width": "150px",
+            "visible": true,
+            "isEditables": true,
+            "validationRules": {"maxLength": 5}
+        },
+        {
+            "fieldName": "date_received",
+            "displayName": "Date Received",
+            "filter": {
+                "type": "Checkbox"
+            },
+            "width": "150px",
+            "visible": true,
+            "isEditables": true,
+            "editType": "datepickeredit",
+            "editParam": {"params": { "format":"dd.MM.yyyy" }}
+        },
+        {
+            "fieldName": "status.name",
+            "displayName": "Status",
+            "filter": {
+                "type": "Checkbox"
+            },
+            "width": "150px",
+            "visible": true,
+            "editType": "dropdownedit",
+            "isEditables": true,
+            "validationRules": {"required": false}
+        },
+        {
+            "fieldName": "fleet_type.name",
+            "displayName": "Fleet Type",
+            "filter": {
+                "type": "Checkbox"
+            },
+            "width": "150px",
+            "visible": true,
+            "editType": "dropdownedit",
+            "isEditables": true
+        },
+        {
+            "fieldName": "comments",
+            "displayName": "Notes",
+            "filter": {
+                "type": "Checkbox"
+            },
+            "width": "150px",
+            "visible": true,
+            "isEditables": true,
+            "validationRules": {"maxLength": 500}
+        }
+    ]
+}

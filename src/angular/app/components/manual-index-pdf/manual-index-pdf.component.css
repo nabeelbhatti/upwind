@@ -1,0 +1,19 @@
+.row {
+  display: flex;
+}
+.column {
+  flex: 50%;
+}
+.pdf-bar {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  color: white;
+  background-color: #212121;
+  border: 1px solid #616161;
+}
+pdf-viewer {
+  height: 736px !important;
+}
+.e-toolbar {
+  min-height: 53px;
+}

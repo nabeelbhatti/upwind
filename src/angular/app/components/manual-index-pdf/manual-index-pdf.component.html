@@ -1,0 +1,74 @@
+<div class="control-section">
+  <div class="row">
+    <div class="column">
+      <div class="pdf-bar">
+        <table *ngIf="showPdfControls === true">
+          <tr>
+            <td class="mx-1">
+              <button
+                (click)="prevPage()"
+                [disabled]="page === 1"
+                class="btn btn-sm btn-outline-light"
+              >
+                Prev
+              </button>
+            </td>
+
+            <td class="mx-1">{{ page }}/{{ totalPages }}</td>
+
+            <td>
+              <button
+                (click)="nextPage()"
+                [disabled]="page === totalPages"
+                class="btn btn-sm btn-outline-light"
+              >
+                Next
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div *ngIf="isFetchingPDF">
+        <span>Please wait we're loading the PDF</span>
+      </div>
+      <div *ngIf="!isFetchingPDF">
+        <pdf-viewer
+                [src]="pdfSrc"
+                [original-size]="true"
+                [show-all]="true"
+                [(page)]="page"
+                [stick-to-page]="true"
+                (after-load-complete)="afterLoadComplete($event)"
+                style="height:450px; width: 100%; "
+        ></pdf-viewer>
+      </div>
+
+    </div>
+    <div class="column">
+      <ejs-grid
+        [height]="642"
+        allowPaging="true"
+        allowSorting="true"
+        [editSettings]="editSettings"
+        [toolbar]="toolbar"
+        [dataSource]="manualListData"
+        (actionBegin)="onActionComplete($event)"
+      >
+        <e-columns>
+          <e-column
+            *ngFor="let column of manualIndexPdfColumns"
+            [field]="column.fieldName"
+            [headerText]="column.displayName"
+            [width]="column.width"
+            clipMode="EllipsisWithTooltip"
+            [visible]="column.visible"
+            [validationRules]="column.validationRules"
+            [allowEditing]="column.allowEditing"
+            [isPrimaryKey]="column.isPrimaryKey"
+          >
+          </e-column>
+        </e-columns>
+      </ejs-grid>
+    </div>
+  </div>
+</div>

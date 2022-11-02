@@ -1,0 +1,105 @@
+[
+  {
+    "fieldName": "project_id",
+    "displayName": "Project ID",
+    "filter": { "type": "Checkbox" },
+    "width": "150px",
+    "visible": false,
+    "validationRules": { "required": true },
+    "allowEditing": false,
+    "isPrimaryKey": true
+  },
+  {
+    "fieldName": "_id",
+    "displayName": "IN ID",
+    "filter": { "type": "Checkbox" },
+    "width": "150px",
+    "visible": false,
+    "validationRules": { "required": true },
+    "allowEditing": false
+  },
+  {
+    "fieldName": "file_detail.sharepoint_url",
+    "displayName": "SharePoint Link",
+    "filter": { "type": "Checkbox" },
+    "width": "150px",
+    "visible": true,
+    "validationRules": { "required": true },
+    "allowEditing": true,
+    "isPrimaryKey": true
+  },
+  {
+    "fieldName": "file_detail.filename",
+    "displayName": "ML_Filename",
+    "filter": { "type": "Checkbox" },
+    "width": "150px",
+    "visible": true,
+    "validationRules": { "required": true },
+    "allowEditing": true,
+    "isPrimaryKey": true
+  },
+  {
+    "fieldName": "category.name",
+    "displayName": "Category",
+    "filter": { "type": "Checkbox" },
+    "width": "150px",
+    "visible": true,
+    "validationRules": { "required": true },
+    "allowEditing": true,
+    "editType": "dropdownedit"
+  },
+  {
+    "fieldName": "mapping_object.code_mapping",
+    "displayName": "ML Manual Code_Mapping",
+    "filter": { "type": "Checkbox" },
+    "width": "150px",
+    "visible": true,
+    "validationRules": { "required": true },
+    "allowEditing": true
+  },
+  {
+    "fieldName": "mapping_object.name_mapping",
+    "displayName": "ML Manual Name_Mapping",
+    "filter": { "type": "Checkbox" },
+    "width": "150px",
+    "visible": true,
+    "validationRules": { "required": true },
+    "allowEditing": true
+  },
+  {
+    "fieldName": "start_page",
+    "displayName": "Start Page",
+    "filter": { "type": "Checkbox" },
+    "width": "150px",
+    "visible": true,
+    "validationRules": { "required": true },
+    "allowEditing": true
+  },
+  {
+    "fieldName": "end_page",
+    "displayName": "End Page",
+    "filter": { "type": "Checkbox" },
+    "width": "150px",
+    "visible": true,
+    "validationRules": { "required": true },
+    "allowEditing": true
+  },
+  {
+    "fieldName": "status.name",
+    "displayName": "Status",
+    "filter": { "type": "Checkbox" },
+    "width": "150px",
+    "visible": true,
+    "validationRules": {},
+    "allowEditing": false
+  },
+  {
+    "fieldName": "date_received",
+    "displayName": "Date of Extraction",
+    "filter": { "type": "Checkbox" },
+    "width": "150px",
+    "visible": false,
+    "validationRules": {},
+    "allowEditing": false
+  }
+]

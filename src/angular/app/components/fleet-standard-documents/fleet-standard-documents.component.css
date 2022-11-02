@@ -1,0 +1,9 @@
+.client-drpdwn {
+    display: flex;
+    padding: 10px 0;
+    align-items: baseline;
+} 
+#ClientName>span {
+    height: 25px;
+    margin-left: 7px;
+}

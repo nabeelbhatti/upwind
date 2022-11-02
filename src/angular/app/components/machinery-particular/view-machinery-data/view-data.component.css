@@ -1,0 +1,8 @@
+.SubmitButton {
+    padding: 5px 10px;
+    font-size: 14px !important;
+}
+
+ejs-grid{
+    overflow: hidden !important;
+}

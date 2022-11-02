@@ -1,0 +1,74 @@
+.buttonprojectPms {
+  width: 100%;
+  height: auto;
+  padding: 10px 0px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.SubmitButton {
+  padding: 5px 10px;
+  font-size: 14px !important;
+}
+
+input,
+textarea,
+button {
+  padding: 8px 15px;
+  border-radius: 5px !important;
+  margin: 5px 0px;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  font-size: 18px !important;
+  font-weight: 300;
+}
+
+input:focus,
+textarea:focus {
+  -moz-box-shadow: none !important;
+  -webkit-box-shadow: none !important;
+  box-shadow: none !important;
+  border: 1px solid #00bcd4;
+  outline-width: 0;
+  font-weight: 400;
+}
+
+.btn-block {
+  text-transform: uppercase;
+  font-size: 15px !important;
+  font-weight: 400;
+  height: 43px;
+  border: 1px solid transparent;
+  cursor: pointer;
+}
+
+.btn-block:hover {
+  color: #fff !important;
+}
+
+button:focus {
+  -moz-box-shadow: none !important;
+  -webkit-box-shadow: none !important;
+  box-shadow: none !important;
+  outline-width: 0;
+}
+
+.btnDisable {
+  cursor: not-allowed !important;
+}
+
+.formm {
+  padding: 10px 0px;
+}
+
+.inputFeilds {
+  background-color: transparent;
+  color: white;
+  font-size: 13px !important;
+  border: 1px solid;
+  height: 35px;
+}
+.vessel-inform-container {
+  padding-top: 0px !important;
+}
+ejs-multiselect input { margin-top: 0px;}

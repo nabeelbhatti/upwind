@@ -1,0 +1,122 @@
+.actionBtns {
+  background-color: transparent;
+  border: 1px solid transparent;
+  padding: 0px;
+  margin: 0px 5px;
+  font-size: 21px !important;
+  color: #fff;
+}
+#pdfQueryInput {
+  font-size: 13px !important;
+  height: 32px;
+  border-radius: 10px;
+}
+.actionbtns {
+  padding: 0px 4px;
+  border: none;
+  margin: 0px 5px;
+  background: transparent;
+  color: white;
+  font-size: 13px !important;
+}
+.inputFeilds {
+  background: transparent !important;
+  color: white;
+}
+.actionbtns:disabled {
+  padding: 0px 4px;
+  border: none;
+  margin: 0px 5px;
+  background: transparent;
+  color: white;
+  font-size: 13px !important;
+  cursor: not-allowed !important;
+}
+.actionbtns:hover {
+  color: blue;
+}
+
+/* --------------------------------------------------------- */
+
+.FormCard {
+  padding: 7px 16px;
+  border: none !important;
+  background-color: transparent;
+}
+.blue-text {
+  color: #00bcd4;
+}
+.form-control-label {
+  margin-bottom: 0;
+}
+select option {
+  color: black;
+  padding: 8px 15px;
+}
+select option:first-child {
+  color: green;
+}
+/* select option {
+  padding: 8px 15px;
+  border-radius: 5px !important;
+  margin: 5px 0px;
+  background: transparent !important;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  font-size: 18px !important;
+  font-weight: 300;
+} */
+input,
+textarea,
+select,
+option,
+button {
+  padding: 8px 15px;
+  border-radius: 5px !important;
+  margin: 5px 0px;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  font-size: 18px !important;
+  font-weight: 300;
+}
+input:focus,
+textarea:focus {
+  -moz-box-shadow: none !important;
+  -webkit-box-shadow: none !important;
+  box-shadow: none !important;
+  border: 1px solid #00bcd4;
+  outline-width: 0;
+  font-weight: 400;
+}
+.btn-block {
+  text-transform: uppercase;
+  font-size: 15px !important;
+  font-weight: 400;
+  height: 43px;
+  border: 1px solid transparent;
+  cursor: pointer;
+}
+.btn-block:hover {
+  color: #fff !important;
+}
+
+button:focus {
+  -moz-box-shadow: none !important;
+  -webkit-box-shadow: none !important;
+  box-shadow: none !important;
+  outline-width: 0;
+}
+
+.btnDisable {
+  cursor: not-allowed !important;
+}
+.external-filters {
+  display: flex;
+}
+.external-filters > span {
+  display: inline-flex;
+  margin: 0;
+}
+.external-filters > span > label.form-control-label {
+  margin: 16px 15px 0px 0;
+}

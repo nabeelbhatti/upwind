@@ -1,0 +1,20 @@
+[
+  {
+    "fieldName": "manual_object.manual_code",
+    "displayName": "ML Manual Code",
+    "filter": { "type": "Checkbox" },
+    "width": "150px",
+    "visible": true,
+    "validationRules": { "required": true },
+    "allowEditing": true
+  },
+  {
+    "fieldName": "manual_object.manual_name",
+    "displayName": "ML Manual Name",
+    "filter": { "type": "Checkbox" },
+    "width": "150px",
+    "visible": true,
+    "validationRules": { "required": true },
+    "allowEditing": true
+  }
+]

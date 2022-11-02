@@ -1,0 +1,152 @@
+<div class="pmsProjectDetail">
+  <ejs-dialog
+    id="component-dialog"
+    #DialogPop
+    header="Project view"
+    [isModal]="true"
+    [animationSettings]="animationSettings"
+    [showCloseIcon]="showCloseIcon"
+    [width]="dialogwidth"
+    (close)="onClose()"
+    [visible]="hidden"
+    (overlayClick)="onOverlayClick()"
+  >
+    <ng-template #content>
+      <div class="row pb-2">
+        <div class="col-md-8">
+          <pdf-viewer
+            [src]="pdfUrl"
+            [original-size]="true"
+            [(page)]="page"
+            [show-all]="true"
+            [stick-to-page]="true"
+            style="height:450px; width: 100%; "
+          ></pdf-viewer>
+        </div>
+
+        <div class="col-md-4">
+          <ejs-tab #tabObj id="tab_default" heightAdjustMode="Auto">
+            <e-tabitems>
+              <e-tabitem
+                (click)="setTab(headerText[0])"
+                id="itemmm"
+                class="ejs-tab-selected"
+                [header]="headerText[0]"
+              >
+                <ng-template #content>
+                  <div *ngIf="singleOcrData" class="test w-100">
+                    <app-main
+                      [singleOcrData]="singleOcrData"
+                      (submitForm)="onSubmit($event)"
+                      (setSelectedComponent)="setSelectedComponent($event)"
+                      (setSelectedModel)="setSelectedModel($event)"
+                      (setSelectedMaker)="setSelectedMaker($event)"
+                    >
+                    </app-main>
+                  </div>
+                </ng-template>
+              </e-tabitem>
+              <e-tabitem [header]="headerText[1]">
+                <ng-template #content>
+                  <app-jobs
+                    [selectedComponent]="selectedComponent"
+                    [selectedModel]="selectedModel"
+                    [selectedMaker]="selectedMaker"
+                    [updatingView]="updatingView"
+                    [jobsFound]="jobsFound"
+                    (updateJobs)="updateJobs($event)"
+                    [singleOcrData]="singleOcrData"
+                    [allJobsSelected]="allJobsSelected"
+                    (linkjobs)="linkJobs($event)"
+                    (selectAlljobs)="selectAllJobs($event)"
+                    (deleteAlljobs)="unlinkAllJobs($event)"
+                    (selectSinglejob)="selectSingleJob($event)"
+                    (linkSinglejob)="linkSingleJob($event)"
+                    (unlinkSinglejob)="unlinkSingleJob($event)"
+                    (loadMorejobs)="loadMoreJobs($event)"
+                    (getAllJobsAftersubmit)="getAllJobsAfterSubmit($event)"
+                  ></app-jobs>
+                </ng-template>
+              </e-tabitem>
+              <e-tabitem [header]="headerText[2]">
+                <ng-template #content>
+                  <app-spares
+                    [allSpareSelected]="allSpareSelected"
+                    [sparesFound]="sparesFound"
+                    [updatingView]="updatingView"
+                    [singleOcrData]="singleOcrData"
+                    (selectAllspares)="selectAllSpare($event)"
+                    (selectSinglespare)="selectSingleSpare($event)"
+                    (unlinkAllspares)="unlinkAllSpares($event)"
+                    (linkspares)="linkSpares($event)"
+                    (unlinkSinglespare)="unlinkSingleSpare($event)"
+                    (linkSinglespare)="linkSingleSpare($event)"
+                    (loadMorespares)="loadMoreSpares($event)"
+                    (getAllSparesAftersubmit)="getAllSparesAfterSubmit($event)"
+                  ></app-spares>
+                </ng-template>
+              </e-tabitem>
+            </e-tabitems>
+          </ejs-tab>
+        </div>
+      </div>
+    </ng-template>
+  </ejs-dialog>
+</div>
+
+<ejs-grid
+  [toolbar]="toolbar"
+  [dataSource]="pmsProjectData"
+  [allowPaging]="true"
+  allowFiltering="true"
+  (toolbarClick)="toolbarClick($event)"
+  [allowExcelExport]="true"
+  [allowPdfExport]="true"
+  [filterSettings]="filterSettings"
+  #Grid
+>
+  <e-columns>
+    <e-column field="file_name" headerText="File Name" width="150"></e-column>
+    <e-column field="page_no" headerText="File Page " width="150"></e-column>
+    <e-column field="part_names" headerText="Part Names" width="150"></e-column>
+
+    <e-column field="makers" headerText="Maker" width="150"></e-column>
+
+    <e-column field="makers_model" headerText="Model" width="150"></e-column>
+
+    <!-- <e-column
+        field="component_names"
+        headerText="Components"
+        width="150"
+      ></e-column> -->
+    <!-- <e-column
+      field="Shell"
+      headerText="Shell Components"
+      width="150"
+    ></e-column> -->
+
+    <!-- <e-column field="Shell" headerText="Number Of Jobs" width="150"></e-column> -->
+
+    <!-- <e-column
+      field="Shell"
+      headerText="Number Of Spares"
+      width="150"
+    ></e-column> -->
+
+    <e-column headerText="View" textAlign="center" width="190">
+      <ng-template #template let-data>
+        <button
+          (click)="openDialog(data)"
+          class="actionBtns ion ion-eye"
+        ></button>
+        <!-- <button
+          *ngIf="data.related_jobs.length > 0"
+          class="actionBtns ion ion-checkmark"
+        ></button>
+        <button *ngIf="data?.related_jobs.length === 0" class="actionBtns">
+          <i class="fa fa-times" aria-hidden="true"></i>
+        </button> -->
+      </ng-template>
+    </e-column>
+  </e-columns>
+</ejs-grid>

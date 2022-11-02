@@ -1,0 +1,94 @@
+[
+  {
+    "fieldName": "in_id",
+    "displayName": "ML_ID",
+    "filter": { "type": "Checkbox" },
+    "width": "200px",
+    "visible": false,
+    "validationRules": { "required": true },
+    "allowEditing": false,
+    "isPrimaryKey": true
+  },
+  {
+    "fieldName": "_id",
+    "displayName": "ML_ID",
+    "filter": { "type": "Checkbox" },
+    "width": "200px",
+    "visible": false,
+    "validationRules": { "required": true },
+    "allowEditing": false,
+    "isPrimaryKey": true
+  },
+  {
+    "fieldName": "category.name",
+    "displayName": "Category",
+    "filter": { "type": "Checkbox" },
+    "width": "150px",
+    "visible": true,
+    "validationRules": {},
+    "allowEditing": false
+  },
+  {
+    "fieldName": "file_detail.parent_file_name",
+    "displayName": "ML_Filename",
+    "filter": { "type": "Checkbox" },
+    "width": "150px",
+    "visible": true,
+    "validationRules": {},
+    "allowEditing": false
+  },
+  {
+    "fieldName": "manual_object.manual_code",
+    "displayName": "ML Manual Code",
+    "filter": { "type": "Checkbox" },
+    "width": "150px",
+    "visible": true,
+    "validationRules": {},
+    "allowEditing": false
+  },
+  {
+    "fieldName": "manual_object.manual_name",
+    "displayName": "ML Manual Name",
+    "filter": { "type": "Checkbox" },
+    "width": "150px",
+    "visible": true,
+    "validationRules": {},
+    "allowEditing": false
+  },
+  {
+    "fieldName": "availability",
+    "displayName": "Availability",
+    "filter": { "type": "Checkbox" },
+    "width": "150px",
+    "visible": true,
+    "validationRules": {},
+    "allowEditing": true
+  },
+  {
+    "fieldName": "pdf_id",
+    "displayName": "PDF ID",
+    "filter": { "type": "Checkbox" },
+    "width": "150px",
+    "visible": true,
+    "validationRules": {},
+    "allowEditing": true
+  },
+  {
+    "fieldName": "source_file_name",
+    "displayName": "Source File Name",
+    "filter": { "type": "Checkbox" },
+    "width": "150px",
+    "visible": true,
+    "validationRules": {},
+    "allowEditing": true
+  },
+  {
+    "fieldName": "notes",
+    "displayName": "Notes",
+    "filter": { "type": "Checkbox" },
+    "width": "150px",
+    "visible": true,
+    "validationRules": {},
+    "allowEditing": true
+  }
+]

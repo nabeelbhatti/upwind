@@ -1,0 +1,472 @@
+<div class="control-section">
+  <div style="position:relative">
+    <ejs-dialog
+      id="AddProject-dialog"
+      #Dialog
+      [header]="header"
+      [isModal]="true"
+      [animationSettings]="animationSettings"
+      [showCloseIcon]="showCloseIcon"
+      [width]="dialogwidth"
+      (close)="onClose()"
+      [visible]="hidden"
+    >
+      <ng-template #content>
+        <form
+          [formGroup]="projectForm"
+          (ngSubmit)="formSubmit()"
+          class="form-card"
+        >
+          <div class="row justify-content-between text-left">
+            <div class="form-group mb-2 col-sm-6 flex-column d-flex">
+              <label class="form-control-label "
+                >Client Name<span class="text-danger"> *</span></label
+              >
+              <!-- <input
+                type="text"
+                class="inputFeilds"
+                        id="clientName"
+                name="clientName"
+                formControlName="clientName"
+              /> -->
+              <ejs-dropdownlist
+                id="customers"
+                formControlName="clientName"
+                class="inputFeilds px-1 mt-1"
+                #sample2
+                [dataSource]="filterByClient"
+                [fields]="fieldss"
+                [popupHeight]="filterPopupHeight"
+                [placeholder]="'Select Client'"
+                sortOrder="Ascending"
+              ></ejs-dropdownlist>
+              <small
+                *ngIf="clientName.invalid && clientName.touched"
+                class="text-danger"
+                >Client Name is required</small
+              >
+            </div>
+            <div class="form-group mb-2 col-sm-6 flex-column d-flex">
+              <label class="form-control-label "
+                >PMS Project Name<span class="text-danger"> *</span></label
+              >
+              <input
+                type="text"
+                class="inputFeilds"
+                id="name"
+                name="name"
+                formControlName="name"
+              />
+              <small *ngIf="name.invalid && name.touched" class="text-danger"
+                >PMS Project Name is required</small
+              >
+            </div>
+          </div>
+          <div class="row justify-content-between text-left">
+            <div class="form-group mb-2 col-sm-6 flex-column d-flex">
+              <label class="form-control-label "
+                >IMO No.<span class="text-danger"> *</span></label
+              >
+              <input
+                type="text"
+                class="inputFeilds"
+                id="imoNo"
+                name="imoNo"
+                formControlName="imoNo"
+                placeholder=""
+              />
+              <small *ngIf="imoNo.invalid && imoNo.touched" class="text-danger"
+                >IMO No. is required</small
+              >
+            </div>
+            <div class="form-group mb-2 col-sm-6 flex-column d-flex">
+              <label class="form-control-label "
+                >Manual Source<span class="text-danger"> *</span></label
+              >
+              <input
+                type="text"
+                class="inputFeilds"
+                id="url"
+                name="url"
+                formControlName="url"
+                placeholder=""
+              />
+              <small *ngIf="url.invalid && url.touched" class="text-danger"
+                >Manual Source is required</small
+              >
+            </div>
+          </div>
+
+          <div class="row justify-content-between text-left">
+            <div class="form-group mb-2 col-sm-6 flex-column d-flex">
+              <label class="form-control-label "
+                >Stage<span class="text-danger"> *</span></label
+              >
+              <input
+                disabled
+                type="text"
+                class="inputFeilds"
+                id="drawingPosition"
+                name="drawingPosition"
+                formControlName="drawingPosition"
+                placeholder=""
+              />
+              <!-- <small
+                *ngIf="drawingPosition.invalid && drawingPosition.touched"
+                class="text-danger"
+                >Stage is required</small
+              > -->
+            </div>
+            <div class="form-group mb-2 col-sm-6 flex-column d-flex">
+              <label class="form-control-label "
+                >Status<span class="text-danger"> *</span></label
+              >
+              <input
+                disabled
+                type="text"
+                class="inputFeilds"
+                id="spareDimension"
+                name="spareDimension"
+                formControlName="spareDimension"
+                placeholder=""
+              />
+              <!-- <small
+                *ngIf="spareDimension.invalid && spareDimension.touched"
+                class="text-danger"
+                >Status is required</small
+              > -->
+            </div>
+          </div>
+
+          <div class="row justify-content-between text-left">
+            <div class="form-group mb-2 col-sm-6 flex-column d-flex">
+              <label class="form-control-label "
+                >Start Date<span class="text-danger"> *</span></label
+              >
+              <input
+                type="date"
+                class="inputFeilds"
+                id="startDate"
+                name="startDate"
+                formControlName="startDate"
+                placeholder=""
+              />
+              <small
+                *ngIf="startDate.invalid && startDate.touched"
+                class="text-danger"
+                >Start Date is required</small
+              >
+            </div>
+            <div class="form-group mb-2 col-sm-6 flex-column d-flex">
+              <label class="form-control-label "
+                >Target Date<span class="text-danger"> *</span></label
+              >
+              <input
+                type="date"
+                class="inputFeilds"
+                id="targetDate"
+                name="targetDate"
+                formControlName="targetDate"
+                placeholder=""
+              />
+              <small
+                *ngIf="targetDate.invalid && targetDate.touched"
+                class="text-danger"
+                >Target Date is required</small
+              >
+            </div>
+          </div>
+
+          <div class="row justify-content-between text-left">
+            <div class="form-group mb-2 col-sm-6 flex-column d-flex">
+              <label class="form-control-label "
+                >End Dtae<span class="text-danger"> *</span></label
+              >
+              <input
+                type="date"
+                class="inputFeilds"
+                id="endDate"
+                name="endDate"
+                formControlName="endDate"
+                placeholder=""
+              />
+              <small
+                *ngIf="endDate.invalid && endDate.touched"
+                class="text-danger"
+                >End Dtae is required</small
+              >
+            </div>
+            <div class="form-group mb-2 col-sm-6 flex-column d-flex">
+              <label class="form-control-label "
+                >PMS Manager<span class="text-danger"> *</span></label
+              >
+              <input
+                type="text"
+                class="inputFeilds"
+                id="pmsManager"
+                name="pmsManager"
+                formControlName="pmsManager"
+                placeholder=""
+              />
+              <small
+                *ngIf="pmsManager.invalid && pmsManager.touched"
+                class="text-danger"
+                >PMS Manager is required</small
+              >
+            </div>
+          </div>
+
+          <div class="row justify-content-between text-left">
+            <div class="form-group mb-2 col-sm-6 flex-column d-flex">
+              <label class="form-control-label "
+                >PMS Analyst<span class="text-danger"> *</span></label
+              >
+              <input
+                type="text"
+                class="inputFeilds"
+                id="pmsAnalyst"
+                name="pmsAnalyst"
+                formControlName="pmsAnalyst"
+                placeholder=""
+              />
+              <small
+                *ngIf="pmsAnalyst.invalid && pmsAnalyst.touched"
+                class="text-danger"
+                >PMS Analyst is required</small
+              >
+            </div>
+            <div class="form-group mb-2 col-sm-6 flex-column d-flex">
+              <label class="form-control-label "
+                >No. Of Files<span class="text-danger"> *</span></label
+              >
+              <input
+                type="text"
+                class="inputFeilds"
+                id="noOfFiles"
+                name="noOfFiles"
+                formControlName="noOfFiles"
+                placeholder=""
+              />
+              <!-- <small
+                *ngIf="noOfFiles.invalid && noOfFiles.touched"
+                class="text-danger"
+                >No. Of Files is required</small
+              > -->
+            </div>
+          </div>
+
+          <div class="row justify-content-end">
+            <div
+              class="form-group mb-2 d-flex  align-items-center justify-content-end col-sm-6"
+            >
+              <button
+                (click)="enableFields()"
+                *ngIf="disableFields === true"
+                type="button"
+                class="SubmitButton"
+              >
+                Enable Fields
+              </button>
+              <button
+                *ngIf="disableFields === false"
+                [disabled]="projectForm.invalid"
+                type="submit"
+                [class]="
+                  projectForm.invalid
+                    ? 'SubmitButton btnDisable'
+                    : 'SubmitButton'
+                "
+              >
+                Submit
+              </button>
+            </div>
+          </div>
+        </form>
+      </ng-template>
+    </ejs-dialog>
+  </div>
+</div>
+<div class="buttonprojectPms">
+  <!-- <ejs-dropdownlist
+    #filterDropDown
+    id="games"
+    [dataSource]="filterByClient"
+    (change)="filterFunction($event)"
+    [fields]="fieldss"
+    placeholder="Select Client"
+    [popupHeight]="filterPopupHeight"
+  ></ejs-dropdownlist> -->
+  <button class="SubmitButton" data-ripple="true" (click)="openDialog()">
+    Add Project
+  </button>
+</div>
+
+<ejs-grid
+  [toolbar]="toolbar"
+  [dataSource]="pmsProjectData"
+  [allowPaging]="true"
+  allowFiltering="true"
+  (toolbarClick)="toolbarClick($event)"
+  [allowExcelExport]="true"
+  [allowPdfExport]="true"
+  [filterSettings]="filterSettings"
+  [pageSettings]="pageSettings"
+  #Grid
+>
+  <e-columns>
+    <e-column field="clientName" headerText="Client Name" width="150">
+    </e-column>
+    <e-column field="name" headerText="PMS Project Name" width="150">
+      <ng-template #template let-data>
+        <a rel="nofollow" [routerLink]="['/pages/projects/', data._id]">{{
+          data.name
+        }}</a>
+      </ng-template>
+    </e-column>
+    <e-column field="imoNo" headerText="IMO No." width="150"></e-column>
+    <e-column
+      field="url"
+      headerText="Manual Source"
+      textAlign="center"
+      width="150"
+    >
+      <ng-template #templateee let-data>
+        <a rel="nofollow" rel="nofollow" href="{{ data.url }}">{{
+          data.url
+        }}</a>
+      </ng-template>
+    </e-column>
+    <e-column
+      field="stage"
+      headerText="Stage"
+      textAlign="center"
+      width="150"
+    ></e-column>
+    <e-column
+      field="status"
+      headerText="Status"
+      textAlign="center"
+      width="150"
+    ></e-column>
+    <e-column headerText="Progress" textAlign="center" width="150">
+      <ng-template #template let-data>
+        <div class="progress">
+          <div
+            class="progress-bar progress-bar-success"
+            role="progressbar"
+            aria-valuenow="{{ data.percentage }}"
+            aria-valuemin="0"
+            aria-valuemax="100"
+            style="width:{{ data.percentage }}%"
+          >
+            {{ data.percentage | number: '1.0-0' }}%
+          </div>
+        </div>
+      </ng-template>
+    </e-column>
+
+    <!--    <e-column-->
+    <!--      field="createdAt"-->
+    <!--      headerText="Last Report"-->
+    <!--      textAlign="center"-->
+    <!--      width="150"-->
+    <!--      type="date"-->
+    <!--      format="yMd"-->
+    <!--    >-->
+    <!--    </e-column>-->
+
+    <!--    <e-column-->
+    <!--      field="updatedAt"-->
+    <!--      headerText="Last Updated"-->
+    <!--      textAlign="center"-->
+    <!--      width="150"-->
+    <!--      type="date"-->
+    <!--      format="yMd"-->
+    <!--    >-->
+    <!--    </e-column>-->
+
+    <!--    <e-column-->
+    <!--      field="lastDownloadedDate"-->
+    <!--      headerText="Last Downloaded"-->
+    <!--      textAlign="center"-->
+    <!--      width="150"-->
+    <!--      type="date"-->
+    <!--      format="yMd"-->
+    <!--    >-->
+    <!--    </e-column>-->
+
+    <!--    <e-column-->
+    <!--      field="lastDownloadedDate"-->
+    <!--      headerText="Target Date "-->
+    <!--      textAlign="center"-->
+    <!--      width="150"-->
+    <!--      type="date"-->
+    <!--      format="yMd"-->
+    <!--    >-->
+    <!--    </e-column>-->
+    <!--    <e-column-->
+    <!--      field="lastDownloadedDate"-->
+    <!--      headerText="End Date"-->
+    <!--      textAlign="center"-->
+    <!--      width="150"-->
+    <!--      type="date"-->
+    <!--      format="yMd"-->
+    <!--    >-->
+    <!--    </e-column>-->
+    <!--    <e-column-->
+    <!--      field="lastDownloadedDate"-->
+    <!--      headerText="PMS Manager"-->
+    <!--      textAlign="center"-->
+    <!--      width="150"-->
+    <!--      type="date"-->
+    <!--      format="yMd"-->
+    <!--    >-->
+    <!--    </e-column>-->
+
+    <!--    <e-column-->
+    <!--      field="lastDownloadedDate"-->
+    <!--      headerText="PMS Analyst"-->
+    <!--      textAlign="center"-->
+    <!--      width="150"-->
+    <!--      type="date"-->
+    <!--      format="yMd"-->
+    <!--    >-->
+    <!--    </e-column>-->
+    <!--    <e-column-->
+    <!--      field="lastDownloadedDate"-->
+    <!--      headerText="Number of Files"-->
+    <!--      textAlign="center"-->
+    <!--      width="150"-->
+    <!--      type="date"-->
+    <!--      format="yMd"-->
+    <!--    >-->
+    <!--    </e-column>-->
+
+    <e-column headerText="Action" textAlign="center" width="190">
+      <ng-template #template let-data>
+        <button
+          [disabled]="
+            !(data.status === 'Completed' || data.status === 'Pending')
+          "
+          (click)="previewProject(data)"
+          class="actionBtns ion ion-eye"
+        ></button>
+
+        <button
+          [disabled]="
+            !(data.status === 'Completed' || data.status === 'Pending')
+          "
+          (click)="refreshPmsProject(data._id)"
+          class="actionBtns ion ion-play"
+        ></button>
+        <button
+          [disabled]="
+            data.status !== 'Completed' || data.no_of_files_found === 0
+          "
+          (click)="download(data._id, data.csv_name)"
+          class="actionBtns ion ion-ios-cloud-download"
+        ></button>
+      </ng-template>
+    </e-column>
+  </e-columns>
+</ejs-grid>

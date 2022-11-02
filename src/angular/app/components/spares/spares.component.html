@@ -1,0 +1,413 @@
+<div class="py-2">
+  <div class="activeSpares">
+    <h5>Active Spares</h5>
+    <div
+      class="activeJobs"
+      infiniteScroll
+      [infiniteScrollDistance]="1"
+      [infiniteScrollThrottle]="50"
+      (scrolled)="onScroll()"
+      [scrollWindow]="false"
+    >
+      <div class="DropDowns">
+        <div class="dropdown1">
+          <ejs-dropdownlist
+            id="customers"
+            #sample2
+            [dataSource]="clients"
+            [fields]="clientField"
+            [popupHeight]="filterPopupHeight"
+            [placeholder]="clientWaterMark"
+            sortOrder="Ascending"
+          ></ejs-dropdownlist>
+        </div>
+      </div>
+      <div class="jobActionsTo">
+        <div class="checkboxAndBulkAction">
+          <input
+            (change)="selectAllSpare($event)"
+            type="checkbox"
+            name="checkbox"
+            id="checkbox1u"
+            class="mr-2"
+            placeholder=""
+            title=""
+            [checked]="allSpareSelected"
+          />
+          <div class="dropdown">
+            <button
+              class="dropdown-toggle"
+              type="button"
+              id="dropdownMenuButton"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
+              Bulk Action
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <button class="actionsToact">
+                Delete Selected
+              </button>
+              <button class="actionsToact" (click)="linkSpares()">
+                Link Selected
+              </button>
+              <button (click)="unlinkAllSpares()" class="actionsToact">
+                Unlink Selected
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="Actions">
+          <button
+            *ngIf="showSpareForm === true"
+            (click)="closeSpareFromFunction()"
+            class="ActionButtons"
+          >
+            Hide Form
+          </button>
+          <button
+            type="button"
+            *ngIf="showSpareForm === false"
+            (click)="showSpareFromFunction()"
+            class="ActionButtons"
+          >
+            Add Spare</button
+          ><button class="ActionButtons">Expand all</button>
+        </div>
+      </div>
+      <div class="FormCard" *ngIf="showSpareForm">
+        <h5 class="text-center mb-4">
+          Add New Spare
+        </h5>
+        <form
+          [formGroup]="addSpareFrom"
+          (ngSubmit)="addSpareSubmit()"
+          class="form-card"
+        >
+          <div class="row justify-content-between text-left">
+            <div class="form-group mb-2 col-sm-6 flex-column d-flex">
+              <label class="form-control-label "
+                >Part Number<span class="text-danger"> *</span></label
+              >
+              <input
+                type="text"
+                class="inputFeilds"
+                id="sparePartNumber"
+                name="sparePartNumber"
+                formControlName="sparePartNumber"
+              />
+              <small
+                *ngIf="sparePartNumber.invalid && sparePartNumber.touched"
+                class="text-danger"
+                >Part Number is required</small
+              >
+            </div>
+            <div class="form-group mb-2 col-sm-6 flex-column d-flex">
+              <label class="form-control-label "
+                >Part Name<span class="text-danger"> *</span></label
+              >
+              <input
+                type="text"
+                class="inputFeilds"
+                id="sparePartName"
+                name="sparePartName"
+                formControlName="sparePartName"
+              />
+              <small
+                *ngIf="sparePartName.invalid && sparePartName.touched"
+                class="text-danger"
+                >Part Name is required</small
+              >
+            </div>
+          </div>
+          <div class="row justify-content-between text-left">
+            <div class="form-group mb-2 col-sm-6 flex-column d-flex">
+              <label class="form-control-label "
+                >Unit Of Measurement<span class="text-danger"> *</span></label
+              >
+              <input
+                type="text"
+                class="inputFeilds"
+                id="UnitOfMeasurement"
+                name="UnitOfMeasurement"
+                formControlName="UnitOfMeasurement"
+                placeholder=""
+              />
+              <small
+                *ngIf="UnitOfMeasurement.invalid && UnitOfMeasurement.touched"
+                class="text-danger"
+                >Unit Of Measurement is required</small
+              >
+            </div>
+            <div class="form-group mb-2 col-sm-6 flex-column d-flex">
+              <label class="form-control-label "
+                >Drawing Number<span class="text-danger"> *</span></label
+              >
+              <input
+                type="text"
+                class="inputFeilds"
+                id="drawingNumber"
+                name="drawingNumber"
+                formControlName="drawingNumber"
+                placeholder=""
+              />
+              <small
+                *ngIf="drawingNumber.invalid && drawingNumber.touched"
+                class="text-danger"
+                >Drawing Number is required</small
+              >
+            </div>
+          </div>
+
+          <div class="row justify-content-between text-left">
+            <div class="form-group mb-2 col-sm-6 flex-column d-flex">
+              <label class="form-control-label "
+                >Drawing Position<span class="text-danger"> *</span></label
+              >
+              <input
+                type="text"
+                class="inputFeilds"
+                id="drawingPosition"
+                name="drawingPosition"
+                formControlName="drawingPosition"
+                placeholder=""
+              />
+              <small
+                *ngIf="drawingPosition.invalid && drawingPosition.touched"
+                class="text-danger"
+                >Drawing Position is required</small
+              >
+            </div>
+            <div class="form-group mb-2 col-sm-6 flex-column d-flex">
+              <label class="form-control-label "
+                >Dimension<span class="text-danger"> *</span></label
+              >
+              <input
+                type="text"
+                class="inputFeilds"
+                id="spareDimension"
+                name="spareDimension"
+                formControlName="spareDimension"
+                placeholder=""
+              />
+              <small
+                *ngIf="spareDimension.invalid && spareDimension.touched"
+                class="text-danger"
+                >Dimension is required</small
+              >
+            </div>
+          </div>
+
+          <div class="row justify-content-between text-left">
+            <div class="form-group mb-2 col-sm-6 flex-column d-flex">
+              <label class="form-control-label "
+                >Material<span class="text-danger"> *</span></label
+              >
+              <input
+                type="text"
+                class="inputFeilds"
+                id="spareMaterial"
+                name="spareMaterial"
+                formControlName="spareMaterial"
+                placeholder=""
+              />
+              <small
+                *ngIf="spareMaterial.invalid && spareMaterial.touched"
+                class="text-danger"
+                >Material is required</small
+              >
+            </div>
+            <div class="form-group mb-2 col-sm-6 flex-column d-flex">
+              <label class="form-control-label "
+                >Maker<span class="text-danger"> *</span></label
+              >
+              <input
+                type="text"
+                class="inputFeilds"
+                id="spareMaker"
+                name="spareMaker"
+                formControlName="spareMaker"
+                placeholder=""
+              />
+              <small
+                *ngIf="spareMaker.invalid && spareMaker.touched"
+                class="text-danger"
+                >Maker is required</small
+              >
+            </div>
+          </div>
+
+          <div class="row justify-content-between text-left">
+            <div class="form-group mb-2 col-sm-6 flex-column d-flex">
+              <label class="form-control-label "
+                >Model<span class="text-danger"> *</span></label
+              >
+              <input
+                type="text"
+                class="inputFeilds"
+                id="spareModel"
+                name="spareModel"
+                formControlName="spareModel"
+                placeholder=""
+              />
+              <small
+                *ngIf="spareModel.invalid && spareModel.touched"
+                class="text-danger"
+                >Model is required</small
+              >
+            </div>
+          </div>
+
+          <div class="row justify-content-between text-left">
+            <div class="form-group mb-2 col-12 flex-column d-flex">
+              <label class="form-control-label "
+                >Description<span class="text-danger"> *</span></label
+              >
+              <textarea
+                type="text"
+                id="spareDescription"
+                name="spareDescription"
+                formControlName="spareDescription"
+                placeholder=""
+              ></textarea>
+              <small
+                *ngIf="spareDescription.invalid && spareDescription.touched"
+                class="text-danger"
+              >
+                Description is required</small
+              >
+            </div>
+          </div>
+          <div class="row justify-content-end">
+            <div
+              class="form-group mb-2 d-flex  align-items-center justify-content-between col-sm-6"
+            >
+              
+              <button
+                [disabled]="addSpareFrom.invalid"
+                type="submit"
+                [class]="
+                  addSpareFrom.invalid
+                    ? 'SubmitButton btnDisable'
+                    : 'SubmitButton'
+                "
+              >
+                Submit
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div *ngIf="sparesFound === undefined">
+        <h3 class="text-centre">No Spare Found</h3>
+      </div>
+      <div class="w-100" *ngIf="sparesFound !== undefined">
+        <ejs-accordion *ngIf="!updatingView">
+          <e-accordionitems>
+            <e-accordionitem
+              [cssClass]="calcCssSpare(Spare) ? 'linked-jon' : ''"
+              *ngFor="let Spare of sparesFound"
+            >
+              <ng-template #header>
+                <div class="AccHeader">
+                  <div class="SparetitleAndCheckBox">
+                    <div class="checkbox">
+                      <label>
+                        <input
+                          (change)="selectSingleSpare($event, Spare?._id)"
+                          class="CheckBoxx"
+                          type="checkbox"
+                          value=""
+                          [checked]="Spare.checked"
+                        />
+                        {{ Spare?.part_name }} | {{ Spare?.drawing_number
+                        }}{{ Spare?.drawing_position }}</label
+                      >
+                    </div>
+                  </div>
+                  <div class="SpareHeaderActions">
+                    <button
+                      *ngIf="calcCssSpare(Spare) === true"
+                      type="button"
+                      (click)="unlinkSingleSpare(Spare._id)"
+                      class="actionBtns ion ion-close"
+                    ></button>
+                    <button
+                      *ngIf="calcCssSpare(Spare) === false"
+                      type="button"
+                      (click)="linkSingleSpare(Spare._id)"
+                      class="actionBtns ion ion-checkmark"
+                    ></button>
+                  </div>
+                </div>
+              </ng-template>
+              <ng-template #content>
+                <div class="accridioContent">
+                  <div class="content">
+                    <label>Part Number :</label>
+                    <p class="Data">{{ Spare?.part_number }}</p>
+                  </div>
+                  <div class="content">
+                    <label>Part Name :</label>
+                    <p class="Data">{{ Spare?.part_name }}</p>
+                  </div>
+                  <div class="content">
+                    <label>Unit of Measurement :</label>
+                    <p class="Data">
+                      {{ Spare?.unit_of_measurement_uid }}
+                    </p>
+                  </div>
+                  <div class="content">
+                    <label>Drawing Number :</label>
+                    <p class="Data">
+                      {{ Spare?.drawing_number }}
+                    </p>
+                  </div>
+                  <div class="content">
+                    <label>Drawing position :</label>
+                    <p class="Data">
+                      {{ Spare?.drawing_position }}
+                    </p>
+                  </div>
+                  <div class="content">
+                    <label>Dimensions :</label>
+                    <p class="Data">{{ Spare?.dimensions }}</p>
+                  </div>
+                  <div class="content">
+                    <label>Material :</label>
+                    <p class="Data">{{ Spare?.dimensions }}</p>
+                  </div>
+
+                  <div class="content">
+                    <label>Maker :</label>
+                    <p class="Data">
+                      {{ Spare?.maker }}
+                    </p>
+                  </div>
+                  <div class="content">
+                    <label>Model :</label>
+                    <p class="Data">
+                      {{ Spare?.model }}
+                    </p>
+                  </div>
+
+                  <div class="content">
+                    <label>Description :</label>
+                    <p class="Data">
+                      {{ Spare?.job_description }}
+                    </p>
+                  </div>
+                  <div class="content">
+                    <label>Job Action :</label>
+                    <p class="Data">Data</p>
+                  </div>
+                </div>
+              </ng-template>
+            </e-accordionitem>
+          </e-accordionitems>
+        </ejs-accordion>
+      </div>
+    </div>
+  </div>
+</div>
